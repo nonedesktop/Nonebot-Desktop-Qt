@@ -4,6 +4,7 @@ from qframelesswindow import FramelessWindow
 class MainWindow(FramelessWindow):
     def __init__(self):
         super().__init__()
+        self.setObjectName("MainWindow")
         self._init_windows_size()
 
     def _init_windows_size(self):
