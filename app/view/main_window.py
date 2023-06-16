@@ -8,5 +8,6 @@ class MainWindow(FramelessWindow):
 
     def _init_windows_size(self):
         self.resize(900, 700)
-        self.setMaximumSize()
-        self.setMinimumSize()
+        # self.setMaximumSize()
+        # self.setMinimumSize()
+        ## Error raised as no arguments, fill args before uncommenting.
