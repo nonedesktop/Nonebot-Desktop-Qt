@@ -1,0 +1,2 @@
+PySide6-Fluent-Widgets>=0.9.4
+nonebot-desktop-wing>=0.2.8
