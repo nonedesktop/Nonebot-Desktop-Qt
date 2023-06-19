@@ -1,5 +1,6 @@
-from qframelesswindow import FramelessWindow
 from PySide6.QtWidgets import QHBoxLayout
+from qframelesswindow import FramelessWindow
+from qfluentwidgets import NavigationInterface
 
 
 class MainWindow(FramelessWindow):
@@ -8,6 +9,7 @@ class MainWindow(FramelessWindow):
         self.setObjectName("MainWindow")
         self._init_windows_size()
         self._init_layout()
+        self._init_navigation_interface()
 
     def _init_windows_size(self):
         self.resize(900, 700)
@@ -21,3 +23,17 @@ class MainWindow(FramelessWindow):
         self.h_box_layout.setContentsMargins(0, 0, 0, 0)
         # TODO add addWidget
         # self.h_box_layout.addWidget()
+
+    def _init_navigation_interface(self):
+        self.navigationInterface = NavigationInterface(
+            self, showMenuButton=True, showReturnButton=True
+        )
+
+        # TODO add subinterface
+        # TODO add custom widget to bottom
+
+        # TODO add separator for design needs
+        # self.navigationInterface.addSeparator()
+
+        # TODO set the default route key a.k.a index or home page : )
+        # qrouter.setDefaultRouteKey()
