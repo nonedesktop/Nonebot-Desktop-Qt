@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QHBoxLayout, QStackedWidget
+from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QWidget
 from qframelesswindow import FramelessWindow
-from qfluentwidgets import NavigationInterface
+from qfluentwidgets import NavigationInterface, NavigationItemPosition
 
 
 class MainWindow(FramelessWindow):
@@ -43,3 +43,16 @@ class MainWindow(FramelessWindow):
 
     def _init_stacked_widget(self):
         self.stacked_widget = QStackedWidget(self)
+
+    def _add_sub_interface(
+        self, interface: QWidget, icon, text: str, position=NavigationItemPosition.TOP
+    ):
+        self.stacked_widget.addWidget(interface)
+        self.navigation_interface.addItem(
+            routeKey=interface.objectName(),
+            icon=icon,
+            text=text,
+            onClick=None,
+            position=position,
+            tooltip=text,
+        )
