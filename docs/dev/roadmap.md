@@ -4,6 +4,7 @@
   * [ ] Create instances
   * [ ] Open existing instances
   * [ ] Run instances
+  * [ ] Remote Instance Management
 * [ ] Log console
 * [ ] Components management
   * [ ] Drivers install/uninstall/enable/disable
