@@ -1,6 +1,18 @@
-from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QFrame, QLabel
 from qframelesswindow import FramelessWindow
 from qfluentwidgets import NavigationInterface, NavigationItemPosition
+
+
+class PlaceholderComponent(QFrame):
+    def __init__(self, text: str, parent):
+        super().__init__(parent)
+        self.setObjectName(text.replace(" ", "-"))
+        self.label = QLabel(text, self)
+        self.label.setAlignment(Qt.AlignCenter)
+        self.hBoxLayout = QHBoxLayout(self)
+        self.hBoxLayout.addWidget(self.label, 1, Qt.AlignCenter)
+        self.hBoxLayout.setContentsMargins(0, 32, 0, 0)
 
 
 class MainWindow(FramelessWindow):
@@ -8,8 +20,8 @@ class MainWindow(FramelessWindow):
         super().__init__()
         self.setObjectName("MainWindow")
         self._init_windows_size()
-        self._init_navigation_interface()
         self._init_stacked_widget()
+        self._init_navigation_interface()
         self._init_layout()
 
     def _init_windows_size(self):
@@ -32,7 +44,6 @@ class MainWindow(FramelessWindow):
             self, showMenuButton=True, showReturnButton=True
         )
 
-        # TODO add subinterface
         # TODO add custom widget to bottom
 
         # TODO add separator for design needs
@@ -45,7 +56,11 @@ class MainWindow(FramelessWindow):
         self.stacked_widget = QStackedWidget(self)
 
     def _add_sub_interface(
-        self, interface: QWidget, icon, text: str, position=NavigationItemPosition.TOP
+        self,
+        interface: PlaceholderComponent,
+        icon,
+        text: str,
+        position=NavigationItemPosition.TOP,
     ):
         self.stacked_widget.addWidget(interface)
         self.navigation_interface.addItem(
