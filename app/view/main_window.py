@@ -42,8 +42,14 @@ class MainWindow(FramelessWindow):
 
     def _init_navigation_interface(self):
         self.navigation_interface = NavigationInterface(
-            self, showMenuButton=True, showReturnButton=True
+            self, showMenuButton=True, showReturnButton=False
         )
+
+        self._add_sub_interface(self.interface_1, None, "实例管理")
+        self._add_sub_interface(self.interface_2, None, "本地管理")
+        self._add_sub_interface(self.interface_3, None, "远程管理")
+        self._add_sub_interface(self.interface_4, None, "配置管理")
+        self._add_sub_interface(self.interface_5, None, "插件市场")
 
         # TODO add custom widget to bottom
 
