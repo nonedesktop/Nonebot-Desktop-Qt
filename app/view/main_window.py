@@ -3,6 +3,8 @@ from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QFrame, QLabel
 from qframelesswindow import FramelessWindow
 from qfluentwidgets import NavigationInterface, NavigationItemPosition
 
+from view.title_bar import CustomTitleBar
+
 
 class PlaceholderComponent(QFrame):
     def __init__(self, text: str, parent):
@@ -18,6 +20,7 @@ class PlaceholderComponent(QFrame):
 class MainWindow(FramelessWindow):
     def __init__(self):
         super().__init__()
+        self.setTitleBar(CustomTitleBar(self))
         self.setObjectName("MainWindow")
         self._init_windows_size()
         self._init_stacked_widget()
@@ -39,10 +42,13 @@ class MainWindow(FramelessWindow):
         self.layout_manager.addWidget(self.navigation_interface)
         self.layout_manager.addWidget(self.stacked_widget)
         # self.h_box_layout.setStretchFactor(self.stacked_widget, 1)
+        # raise title bar
+        self.titleBar.raise_()
+        self.navigation_interface.displayModeChanged.connect(self.titleBar.raise_)
 
     def _init_navigation_interface(self):
         self.navigation_interface = NavigationInterface(
-            self, showMenuButton=True, showReturnButton=False
+            self, showMenuButton=True, showReturnButton=True
         )
 
         self._add_sub_interface(self.interface_1, None, "实例管理")
