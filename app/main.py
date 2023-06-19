@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QApplication
 
 from controller.controller import Controller
 
+
 if __name__ == "__main__":
     time_start = time.perf_counter()
     app = QApplication()
