@@ -19,12 +19,12 @@ class MainWindow(FramelessWindow):
         ## Error raised as no arguments, fill args before uncommenting.
 
     def _init_layout(self):
-        self.h_box_layout = QHBoxLayout(self)
-        self.h_box_layout.setSpacing(0)
-        self.h_box_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_manager = QHBoxLayout(self)
+        self.layout_manager.setSpacing(0)
+        self.layout_manager.setContentsMargins(0, 0, 0, 0)
         # TODO add addWidget
-        self.h_box_layout.addWidget(self.navigation_interface)
-        self.h_box_layout.addWidget(self.stacked_widget)
+        self.layout_manager.addWidget(self.navigation_interface)
+        self.layout_manager.addWidget(self.stacked_widget)
         # self.h_box_layout.setStretchFactor(self.stacked_widget, 1)
 
     def _init_navigation_interface(self):
