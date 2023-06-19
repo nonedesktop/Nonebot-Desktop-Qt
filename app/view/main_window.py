@@ -8,8 +8,8 @@ class MainWindow(FramelessWindow):
         super().__init__()
         self.setObjectName("MainWindow")
         self._init_windows_size()
-        self._init_layout()
         self._init_navigation_interface()
+        self._init_layout()
 
     def _init_windows_size(self):
         self.resize(900, 700)
@@ -22,7 +22,7 @@ class MainWindow(FramelessWindow):
         self.h_box_layout.setSpacing(0)
         self.h_box_layout.setContentsMargins(0, 0, 0, 0)
         # TODO add addWidget
-        # self.h_box_layout.addWidget()
+        self.h_box_layout.addWidget(self.navigationInterface)
 
     def _init_navigation_interface(self):
         self.navigationInterface = NavigationInterface(
