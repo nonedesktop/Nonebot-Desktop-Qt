@@ -21,6 +21,7 @@ class MainWindow(FramelessWindow):
         self.setObjectName("MainWindow")
         self._init_windows_size()
         self._init_stacked_widget()
+        self._init_sub_interface()
         self._init_navigation_interface()
         self._init_layout()
 
@@ -54,6 +55,13 @@ class MainWindow(FramelessWindow):
 
     def _init_stacked_widget(self):
         self.stacked_widget = QStackedWidget(self)
+
+    def _init_sub_interface(self):
+        self.interface_1 = PlaceholderComponent("实例管理", self)
+        self.interface_2 = PlaceholderComponent("本地管理", self)
+        self.interface_3 = PlaceholderComponent("远程管理", self)
+        self.interface_4 = PlaceholderComponent("配置管理", self)
+        self.interface_5 = PlaceholderComponent("插件市场", self)
 
     def _add_sub_interface(
         self,
