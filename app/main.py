@@ -9,6 +9,7 @@ if __name__ == "__main__":
     time_start = time.perf_counter()
     app = QApplication()
     ctr = Controller()
+    ctr.ui_main_window.show()
     time_end = time.perf_counter()
     print(f"系统渲染UI耗时{((time_end - time_start) * 1000):.1f}毫秒")
     app.exec()
