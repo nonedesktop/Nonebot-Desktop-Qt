@@ -9,7 +9,7 @@ class CustomTitleBar(TitleBar):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.setFixedHeight(48)
+        self.setFixedHeight(32)
         self.hBoxLayout.removeWidget(self.minBtn)
         self.hBoxLayout.removeWidget(self.maxBtn)
         self.hBoxLayout.removeWidget(self.closeBtn)
@@ -19,14 +19,14 @@ class CustomTitleBar(TitleBar):
         self.iconLabel.setFixedSize(18, 18)
         self.hBoxLayout.insertSpacing(0, 10)
         self.hBoxLayout.insertWidget(
-            1, self.iconLabel, 0, Qt.AlignLeft | Qt.AlignVCenter
+            1, self.iconLabel, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
         )
         self.window().windowIconChanged.connect(self.setIcon)
 
         # add title label
         self.titleLabel = QLabel(self)
         self.hBoxLayout.insertWidget(
-            2, self.titleLabel, 0, Qt.AlignLeft | Qt.AlignVCenter
+            2, self.titleLabel, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
         )
         self.titleLabel.setObjectName("titleLabel")
         self.window().windowTitleChanged.connect(self.setTitle)
@@ -35,7 +35,7 @@ class CustomTitleBar(TitleBar):
         self.buttonLayout = QHBoxLayout()
         self.buttonLayout.setSpacing(0)
         self.buttonLayout.setContentsMargins(0, 0, 0, 0)
-        self.buttonLayout.setAlignment(Qt.AlignTop)
+        self.buttonLayout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.buttonLayout.addWidget(self.minBtn)
         self.buttonLayout.addWidget(self.maxBtn)
         self.buttonLayout.addWidget(self.closeBtn)
