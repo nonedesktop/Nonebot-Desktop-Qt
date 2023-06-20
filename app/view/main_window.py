@@ -11,9 +11,9 @@ class PlaceholderComponent(QFrame):
         super().__init__(parent)
         self.setObjectName(text.replace(" ", "-"))
         self.label = QLabel(text, self)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.hBoxLayout = QHBoxLayout(self)
-        self.hBoxLayout.addWidget(self.label, 1, Qt.AlignCenter)
+        self.hBoxLayout.addWidget(self.label, 1, Qt.AlignmentFlag.AlignCenter)
         self.hBoxLayout.setContentsMargins(0, 32, 0, 0)
 
 
@@ -51,11 +51,11 @@ class MainWindow(FramelessWindow):
             self, showMenuButton=True, showReturnButton=True
         )
 
-        self._add_sub_interface(self.interface_1, None, "实例管理")
-        self._add_sub_interface(self.interface_2, None, "本地管理")
-        self._add_sub_interface(self.interface_3, None, "远程管理")
-        self._add_sub_interface(self.interface_4, None, "配置管理")
-        self._add_sub_interface(self.interface_5, None, "插件市场")
+        self._add_sub_interface(self.interface_1, None, "实例总览")
+        self._add_sub_interface(self.interface_2, None, "实例详情")
+        self._add_sub_interface(self.interface_3, None, "配置管理")
+        self._add_sub_interface(self.interface_4, None, "插件市场")
+        self._add_sub_interface(self.interface_5, None, "关于")
 
         # TODO add custom widget to bottom
 
@@ -69,11 +69,11 @@ class MainWindow(FramelessWindow):
         self.stacked_widget = QStackedWidget(self)
 
     def _init_sub_interface(self):
-        self.interface_1 = PlaceholderComponent("实例管理", self)
-        self.interface_2 = PlaceholderComponent("本地管理", self)
-        self.interface_3 = PlaceholderComponent("远程管理", self)
-        self.interface_4 = PlaceholderComponent("配置管理", self)
-        self.interface_5 = PlaceholderComponent("插件市场", self)
+        self.interface_1 = PlaceholderComponent("实例总览", self)
+        self.interface_2 = PlaceholderComponent("实例详情", self)
+        self.interface_3 = PlaceholderComponent("配置管理", self)
+        self.interface_4 = PlaceholderComponent("插件市场", self)
+        self.interface_5 = PlaceholderComponent("关于", self)
 
     def _add_sub_interface(
         self,
