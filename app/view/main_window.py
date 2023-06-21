@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QFrame, QLabel
+from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QFrame, QLabel, QWidget
 from qframelesswindow import FramelessWindow
 from qfluentwidgets import NavigationInterface, NavigationItemPosition
 
@@ -71,7 +71,7 @@ class MainWindow(FramelessWindow):
 
     def _add_sub_interface(
         self,
-        interface: PlaceholderComponent,
+        interface: QWidget,
         icon,
         text: str,
         position=NavigationItemPosition.TOP,
@@ -85,12 +85,3 @@ class MainWindow(FramelessWindow):
             position=position,
             tooltip=text,
         )
-
-    def init_windows_geometry(self, w: int, h: int):
-        desktop_pixel_ratio: float = self.devicePixelRatioF()
-        self.resize(w * 0.8, h * 0.8)
-        self.setMinimumSize(
-            w * desktop_pixel_ratio * 1030 / 1920, h * desktop_pixel_ratio * 780 / 1080
-        )
-        self.setMaximumSize(w * 1.2, h * 1.2)
-        self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
