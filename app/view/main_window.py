@@ -23,17 +23,10 @@ class MainWindow(FramelessWindow):
         super().__init__()
         self.setTitleBar(CustomTitleBar(self))
         self.setObjectName("MainWindow")
-        self._init_windows_size()
         self._init_stacked_widget()
         self._init_sub_interface()
         self._init_navigation_interface()
         self._init_layout()
-
-    def _init_windows_size(self):
-        self.resize(900, 700)
-        # self.setMaximumSize()
-        # self.setMinimumSize()
-        ## Error raised as no arguments, fill args before uncommenting.
 
     def _init_layout(self):
         self.layout_manager = QHBoxLayout(self)
@@ -57,7 +50,6 @@ class MainWindow(FramelessWindow):
         self._add_sub_interface(self.interface_3, None, "配置管理")
         self._add_sub_interface(self.market_interface, None, "插件市场")
         self._add_sub_interface(self.interface_5, None, "关于")
-        
 
         # TODO add custom widget to bottom
 
@@ -93,3 +85,10 @@ class MainWindow(FramelessWindow):
             position=position,
             tooltip=text,
         )
+
+    def init_windows_geometry(self, w: int, h: int):
+        desktop_pixel_ratio: float = self.devicePixelRatioF()
+        self.resize(w*0.8, h*0.8)
+        self.setMinimumSize(w*desktop_pixel_ratio*1030/1920, h*desktop_pixel_ratio*780/1080)
+        self.setMaximumSize(w*1.2, h*1.2)
+        self.move(w//2 - self.width()//2, h//2 - self.height()//2)
