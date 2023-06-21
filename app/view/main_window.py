@@ -4,6 +4,7 @@ from qframelesswindow import FramelessWindow
 from qfluentwidgets import NavigationInterface, NavigationItemPosition
 
 from view.title_bar import CustomTitleBar
+from view.plugin_interface import PluginInterface
 
 
 class PlaceholderComponent(QFrame):
@@ -54,8 +55,9 @@ class MainWindow(FramelessWindow):
         self._add_sub_interface(self.interface_1, None, "实例总览")
         self._add_sub_interface(self.interface_2, None, "实例详情")
         self._add_sub_interface(self.interface_3, None, "配置管理")
-        self._add_sub_interface(self.interface_4, None, "插件市场")
+        self._add_sub_interface(self.pluginInterface, None, "插件市场")
         self._add_sub_interface(self.interface_5, None, "关于")
+        
 
         # TODO add custom widget to bottom
 
@@ -69,10 +71,10 @@ class MainWindow(FramelessWindow):
         self.stacked_widget = QStackedWidget(self)
 
     def _init_sub_interface(self):
+        self.pluginInterface = PluginInterface(self)
         self.interface_1 = PlaceholderComponent("实例总览", self)
         self.interface_2 = PlaceholderComponent("实例详情", self)
         self.interface_3 = PlaceholderComponent("配置管理", self)
-        self.interface_4 = PlaceholderComponent("插件市场", self)
         self.interface_5 = PlaceholderComponent("关于", self)
 
     def _add_sub_interface(
