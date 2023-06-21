@@ -88,7 +88,9 @@ class MainWindow(FramelessWindow):
 
     def init_windows_geometry(self, w: int, h: int):
         desktop_pixel_ratio: float = self.devicePixelRatioF()
-        self.resize(w*0.8, h*0.8)
-        self.setMinimumSize(w*desktop_pixel_ratio*1030/1920, h*desktop_pixel_ratio*780/1080)
-        self.setMaximumSize(w*1.2, h*1.2)
-        self.move(w//2 - self.width()//2, h//2 - self.height()//2)
+        self.resize(w * 0.8, h * 0.8)
+        self.setMinimumSize(
+            w * desktop_pixel_ratio * 1030 / 1920, h * desktop_pixel_ratio * 780 / 1080
+        )
+        self.setMaximumSize(w * 1.2, h * 1.2)
+        self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
