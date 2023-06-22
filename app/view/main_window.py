@@ -3,8 +3,8 @@ from PySide6.QtWidgets import QHBoxLayout, QStackedWidget, QFrame, QLabel, QWidg
 from qframelesswindow import FramelessWindow
 from qfluentwidgets import NavigationInterface, NavigationItemPosition
 
-from view.title_bar import CustomTitleBar
-from view.plugin_interface import MarketInterface
+from view.components import title_bar
+from view.interface import market_interface
 
 
 class PlaceholderComponent(QFrame):
@@ -21,7 +21,7 @@ class PlaceholderComponent(QFrame):
 class MainWindow(FramelessWindow):
     def __init__(self):
         super().__init__()
-        self.setTitleBar(CustomTitleBar(self))
+        self.setTitleBar(title_bar.CustomTitleBar(self))
         self.setObjectName("MainWindow")
         self._init_stacked_widget()
         self._init_sub_interface()
@@ -63,7 +63,7 @@ class MainWindow(FramelessWindow):
         self.stacked_widget = QStackedWidget(self)
 
     def _init_sub_interface(self):
-        self.market_interface = MarketInterface(self)
+        self.market_interface = market_interface.MarketInterface(self)
         self.interface_1 = PlaceholderComponent("实例总览", self)
         self.interface_2 = PlaceholderComponent("实例详情", self)
         self.interface_3 = PlaceholderComponent("配置管理", self)
