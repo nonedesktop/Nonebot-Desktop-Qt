@@ -14,3 +14,8 @@ class Controller:
         )
         main.setMaximumSize(int(w * 1.2), int(h * 1.2))
         main.move(w // 2 - main.width() // 2, h // 2 - main.height() // 2)
+
+    def show(self, w: int, h: int):
+        self.init_window_geometry(w, h)
+        main = self.ui_main_window
+        main.show()
