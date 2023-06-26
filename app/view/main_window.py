@@ -1,6 +1,6 @@
 from qfluentwidgets import SplitFluentWindow
 
-from view.interface.interface_templates import InterfaceTemplates
+from view.interface import InterfaceTemplates
 
 
 class MainWindow(SplitFluentWindow):
