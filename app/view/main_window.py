@@ -20,4 +20,4 @@ class MainWindow(SplitFluentWindow):
         self.addSubInterface(self.market_interface, None, "Extension Market")
 
     def __initWindow(self):
-        pass
+        self.setWindowTitle('Nonebot-Desktop-Qt')
