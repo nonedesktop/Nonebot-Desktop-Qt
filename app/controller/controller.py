@@ -1,9 +1,12 @@
+from qfluentwidgets import setTheme, Theme
+
 from view.main_window import MainWindow
 
 
 class Controller:
     def __init__(self) -> None:
         self.ui_main_window = MainWindow()
+        self.set_window_theme(Theme.DARK)
 
     def init_window_geometry(self, w: int, h: int):
         main = self.ui_main_window
@@ -14,6 +17,9 @@ class Controller:
         )
         main.setMaximumSize(int(w * 1.2), int(h * 1.2))
         main.move(w // 2 - main.width() // 2, h // 2 - main.height() // 2)
+
+    def set_window_theme(self, theme: Theme):
+        setTheme(theme)
 
     def show(self, w: int, h: int):
         self.init_window_geometry(w, h)
