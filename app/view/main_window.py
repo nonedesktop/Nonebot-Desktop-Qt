@@ -14,6 +14,9 @@ class MainWindow(SplitFluentWindow):
     def __createSubInterface(self):
         self.home_interface = InterfaceTemplates("HomeInterface", "看板子界面", self)
         self.market_interface = InterfaceTemplates("MarketInterface", "扩展商店子界面", self)
+        self.global_instance_interface = InterfaceTemplates(
+            "GlobalInstanceSelection", "选择全局实例子界面", self
+        )
         self.setting_interface = InterfaceTemplates("SettingInterface", "设置子界面", self)
 
     def __initNavigation(self):
@@ -22,7 +25,15 @@ class MainWindow(SplitFluentWindow):
         self.navigationInterface.addSeparator()
         self.addSubInterface(self.market_interface, None, "Extension Market")
         # set bottom menu
-        self.addSubInterface(self.setting_interface, None, "Settings", NavigationItemPosition.BOTTOM)
+        self.addSubInterface(
+            self.global_instance_interface,
+            None,
+            "Global Instance Selection",
+            NavigationItemPosition.BOTTOM,
+        )
+        self.addSubInterface(
+            self.setting_interface, None, "Settings", NavigationItemPosition.BOTTOM
+        )
 
     def __initWindow(self):
-        self.setWindowTitle('Nonebot-Desktop-Qt')
+        self.setWindowTitle("Nonebot-Desktop-Qt")
