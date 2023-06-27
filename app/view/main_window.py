@@ -1,6 +1,6 @@
 from qfluentwidgets import SplitFluentWindow, NavigationItemPosition
 
-from view.interface import InterfaceTemplates
+from view.interface import InterfaceTemplates, SettingInterface
 
 
 class MainWindow(SplitFluentWindow):
@@ -16,7 +16,7 @@ class MainWindow(SplitFluentWindow):
         self.instance_interface = InterfaceTemplates("InstanceInterface", "实例管理子界面", self)
         self.market_interface = InterfaceTemplates("MarketInterface", "扩展商店子界面", self)
         self.global_instance_interface = InterfaceTemplates("GlobalInstanceSelection", "选择全局实例子界面", self)
-        self.setting_interface = InterfaceTemplates("SettingInterface", "设置子界面", self)
+        self.setting_interface = SettingInterface(self)
 
     def __initNavigation(self):
         # set top menu
