@@ -2,11 +2,15 @@ from pydantic import BaseModel
 
 
 class ColoredTag(BaseModel):
+    """Tag with color"""
+
     label: str
     color: str
 
 
 class CommonInfo(BaseModel):
+    """Common info for drivers, adapters and plugins"""
+
     module_name: str
     """Name for importing"""
 
@@ -33,8 +37,12 @@ class CommonInfo(BaseModel):
 
 
 class PluginInfo(CommonInfo):
-    type: str
+    """Plugin info model"""
+    # Some plugins are still not prepared for these metadata, so `None` is still needed
+    # for now, until the registry is ready for all plugins.
+
+    type: str | None
     """Plugin category"""
 
-    supported_adapters: list[str]
+    supported_adapters: list[str] | None
     """Supported adapters"""
