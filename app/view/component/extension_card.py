@@ -31,6 +31,7 @@ class ExtensionCard(CardWidget):
         """Tags"""
         self.is_official = is_official
         """Whether an extension is official"""
+        
 
 
 class PluginCard(ExtensionCard):

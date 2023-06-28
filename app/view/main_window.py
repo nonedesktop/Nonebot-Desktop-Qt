@@ -1,6 +1,8 @@
 from qfluentwidgets import SplitFluentWindow, NavigationItemPosition
+from qfluentwidgets import FluentIcon as FI
 
 from view.interface import InterfaceTemplates, MarketInterface, SettingInterface
+from core.icon import MyFluentIcon as MFI
 
 
 class MainWindow(SplitFluentWindow):
@@ -20,15 +22,16 @@ class MainWindow(SplitFluentWindow):
 
     def __initNavigation(self):
         # set top menu
-        self.addSubInterface(self.home_interface, None, "DashBoard")
+        self.addSubInterface(self.home_interface, FI.HOME, "DashBoard")
+        self.addSubInterface(self.market_interface, FI.APPLICATION, "Extension Market")
         # set menu separator
         self.navigationInterface.addSeparator()
         # set scroll menu
-        self.addSubInterface(self.instance_interface, None, "Instance Management", NavigationItemPosition.SCROLL)
-        self.addSubInterface(self.market_interface, None, "Extension Market", NavigationItemPosition.SCROLL)
+        self.addSubInterface(self.instance_interface, MFI.BOT, "Instance Management", NavigationItemPosition.SCROLL)
+
         # set bottom menu
-        self.addSubInterface(self.global_instance_interface, None, "Global Instance Selection", NavigationItemPosition.BOTTOM,)
-        self.addSubInterface(self.setting_interface, None, "Settings", NavigationItemPosition.BOTTOM)
+        self.addSubInterface(self.global_instance_interface, MFI.BOTSPARKLE, "Global Instance Selection", NavigationItemPosition.BOTTOM,)
+        self.addSubInterface(self.setting_interface, FI.SETTING, "Settings", NavigationItemPosition.BOTTOM)
 
     def __initWindow(self):
         self.setWindowTitle("Nonebot-Desktop-Qt")
