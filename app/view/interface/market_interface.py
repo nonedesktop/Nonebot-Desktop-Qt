@@ -2,6 +2,7 @@ from PySide6.QtGui import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 from qfluentwidgets import ScrollArea
 
+from core import StyleSheet
 from view.component import InterfaceTitleBar
 
 
@@ -27,10 +28,10 @@ class MarketInterface(ScrollArea):
         self.setObjectName("MarketInterface")
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setWidgetResizable(True)
-        # TODO Stylesheet
+        StyleSheet.MARKET_INTERFACE.apply(self)
 
     def __init_sub_widget(self):
-        self.view_container.setObjectName("MarketInterfaceView")
+        self.view_container.setObjectName("MarketInterfaceContainerView")
 
     def __init_layout(self):
         # 需要微调位置来适配
