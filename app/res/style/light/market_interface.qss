@@ -1,0 +1,3 @@
+MarketInterface, #MarketInterfaceContainerView {
+    background-color: transparent;
+}
