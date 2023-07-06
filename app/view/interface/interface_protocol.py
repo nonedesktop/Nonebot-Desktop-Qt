@@ -1,12 +1,11 @@
-from typing import Protocol, TYPE_CHECKING
+from typing import Optional, Protocol, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Optional
     from PySide6.QtCore import QObject
 
 
 class Interface(Protocol):
-    def __init__(self, parent: Optional[QObject] = None) -> None:
+    def __init__(self, parent: Optional["QObject"] = None) -> None:
         # super().__init__(parent)
         ...
 
