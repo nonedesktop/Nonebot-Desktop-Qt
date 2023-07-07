@@ -1,5 +1,5 @@
 from PySide6.QtGui import Qt
-from PySide6.QtWidgets import QWidget, QVBoxLayout
+from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout
 from qfluentwidgets import (
     ScrollArea,
     SmoothScrollArea,
@@ -25,16 +25,20 @@ class ExtensionCardView(QWidget):
         )
         self.card_view_container = SmoothScrollArea(self)
         self.card_view_content = QWidget(self.card_view_container)
+        self.command_bar_container = QFrame(self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         self.card_view_content_layout_manager = FlowLayout(
             self.card_view_content, True, True
         )
+        self.command_bar_container_layout_manager = QHBoxLayout(
+            self.command_bar_container
+        )
         # Instantiating data and data structures
         self.extension_cards: list[ExtensionCard] = []
         # TODO 实现一个前缀搜索树 Trie Tree
         self.__init_sub_widget()
-        self.__init_sub_widget()
+        self.__init_sub_widget_layout()
         self.__init_layout()
 
     def __init_sub_widget(self):
@@ -44,18 +48,20 @@ class ExtensionCardView(QWidget):
         # init card_view_container widget
         self.card_view_container.setWidget(self.card_view_content)
         self.card_view_container.setWidgetResizable(True)
-        self.card_view_container.setHorizontalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
-        )
+        self.card_view_container.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
     def __init_layout(self):
         self.layout_manager.setContentsMargins(0, 0, 0, 0)
         self.layout_manager.setSpacing(10)
-        # TODO 实现一个QFRAM的CommandBar来布局其他按钮
-        self.layout_manager.addWidget(self.search_line_edit)
+        self.layout_manager.addWidget(self.command_bar_container)
         self.layout_manager.addWidget(self.card_view_container)
 
     def __init_sub_widget_layout(self):
+        # init command_bar_container widget layout
+        self.command_bar_container_layout_manager.addWidget(self.search_line_edit)
+        self.command_bar_container_layout_manager.addWidget(self.plugin_lable_button)
+        self.command_bar_container_layout_manager.addWidget(self.adapter_lable_button)
+        self.command_bar_container_layout_manager.addWidget(self.certified_extensions_lable_button)
         # init card_view_container widget layout
         self.card_view_container.setViewportMargins(2, 5, 2, 5)
         # init card_view_content widget layout
