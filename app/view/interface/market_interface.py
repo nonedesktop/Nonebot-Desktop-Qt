@@ -96,7 +96,8 @@ class MarketInterface(ScrollArea):
         StyleSheet.MARKET_INTERFACE.apply(self)
 
     def __init_sub_widget(self):
-        self.view_container.setObjectName("MarketInterfaceContainerView")
+        self.view_container.setObjectName("MarketInterfaceViewContainer")
+        self.title_bar.setObjectName("MarketInterfaceTitleBar")
 
     def __init_layout(self):
         # 需要微调位置来适配

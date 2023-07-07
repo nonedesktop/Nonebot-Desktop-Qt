@@ -1,3 +1,9 @@
-MarketInterface, #MarketInterfaceContainerView {
+QScrollArea {
+    border: none;
+}
+
+#MarketInterface,
+#MarketInterfaceTitleBar,
+#MarketInterfaceViewContainer {
     background-color: transparent;
 }
