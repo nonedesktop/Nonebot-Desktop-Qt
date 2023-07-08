@@ -52,8 +52,8 @@ class ExtensionCardView(QWidget):
 
     def __init_layout(self):
         self.layout_manager.setContentsMargins(0, 0, 0, 0)
-        self.layout_manager.setSpacing(10)
         self.layout_manager.addWidget(self.command_bar_container)
+        self.layout_manager.setSpacing(10)
         self.layout_manager.addWidget(self.card_view_container)
 
     def __init_sub_widget_layout(self):
@@ -77,7 +77,7 @@ class MarketInterface(ScrollArea):
         self.view_container = QWidget(self)
         # TODO 需要微调位置来适配Title Bar
         self.title_bar = InterfaceTitleBar(
-            "Extension Store",
+            "扩展商店",
             "Enjoy all the extensions from the community, with our rich ecosystem of plugins",
             self,
         )
