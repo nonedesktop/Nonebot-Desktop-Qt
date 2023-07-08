@@ -1,4 +1,4 @@
-from qfluentwidgets import setTheme, Theme
+from qfluentwidgets import Theme, setTheme, setThemeColor
 
 from view.main_window import MainWindow
 
@@ -21,6 +21,7 @@ class Controller:
 
     def set_window_theme(self, theme: Theme):
         setTheme(theme)
+        setThemeColor("#ea5252")
 
     def show(self, w: int, h: int):
         self.init_window_geometry(w, h)
