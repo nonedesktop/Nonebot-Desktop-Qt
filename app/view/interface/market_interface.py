@@ -77,7 +77,7 @@ class MarketInterface(ScrollArea):
         self.view_container = QWidget(self)
         # TODO 需要微调位置来适配Title Bar
         self.title_bar = InterfaceTitleBar(
-            "扩展商店",
+            "🛒扩展商店",
             "Enjoy all the extensions from the community, with our rich ecosystem of plugins",
             self,
         )

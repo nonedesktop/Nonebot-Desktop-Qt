@@ -20,7 +20,7 @@ class InterfaceTitleBar(QWidget):
         self.setFixedHeight(120)
 
     def __init_layout(self):
-        self.setContentsMargins(36, 22, 36, 12)
+        self.setContentsMargins(36, 28, 36, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.layout_manager.addWidget(self.title_lable)
         self.layout_manager.addWidget(self.subtitle_lable)
