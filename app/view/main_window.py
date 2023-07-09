@@ -1,7 +1,12 @@
 from qfluentwidgets import SplitFluentWindow, NavigationItemPosition
 from qfluentwidgets import FluentIcon as FI
 
-from view.interface import InterfaceTemplates, MarketInterface, SettingInterface
+from view.interface import (
+    InterfaceTemplates,
+    MarketInterface,
+    ConsoleInterface,
+    SettingInterface,
+)
 from core.icon import MyFluentIcon as MFI
 
 
@@ -15,9 +20,14 @@ class MainWindow(SplitFluentWindow):
 
     def __createSubInterface(self):
         self.home_interface = InterfaceTemplates("HomeInterface", "看板子界面", self)
-        self.instance_interface = InterfaceTemplates("InstanceInterface", "实例管理子界面", self)
+        self.instance_interface = InterfaceTemplates(
+            "InstanceInterface", "实例管理子界面", self
+        )
         self.market_interface = MarketInterface(self)
-        self.global_instance_interface = InterfaceTemplates("GlobalInstanceSelection", "选择全局实例子界面", self)
+        self.global_instance_interface = InterfaceTemplates(
+            "GlobalInstanceSelection", "选择全局实例子界面", self
+        )
+        self.console_interface = ConsoleInterface(self)
         self.setting_interface = SettingInterface(self)
 
     def __initNavigation(self):
@@ -27,11 +37,29 @@ class MainWindow(SplitFluentWindow):
         # set menu separator
         self.navigationInterface.addSeparator()
         # set scroll menu
-        self.addSubInterface(self.instance_interface, MFI.BOT, "Instance Management", NavigationItemPosition.SCROLL)
+        self.addSubInterface(
+            self.instance_interface,
+            MFI.BOT,
+            "Instance Management",
+            NavigationItemPosition.SCROLL,
+        )
 
         # set bottom menu
-        self.addSubInterface(self.global_instance_interface, MFI.BOTSPARKLE, "Global Instance Selection", NavigationItemPosition.BOTTOM,)
-        self.addSubInterface(self.setting_interface, FI.SETTING, "Settings", NavigationItemPosition.BOTTOM)
+        self.addSubInterface(
+            self.global_instance_interface,
+            MFI.BOTSPARKLE,
+            "Global Instance Selection",
+            NavigationItemPosition.BOTTOM,
+        )
+        self.addSubInterface(
+            self.console_interface, FI.PRINT, "Console", NavigationItemPosition.BOTTOM
+        )
+        self.addSubInterface(
+            self.setting_interface,
+            FI.SETTING,
+            "Settings",
+            NavigationItemPosition.BOTTOM,
+        )
 
     def __initWindow(self):
         self.setWindowTitle("Nonebot-Desktop-Qt")
