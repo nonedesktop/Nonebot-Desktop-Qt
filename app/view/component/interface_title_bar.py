@@ -1,7 +1,7 @@
 from PySide6.QtGui import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 
-from .lable import InterfaceTitle, InterfaceDesc
+from .label import InterfaceTitle, InterfaceDesc
 
 
 class InterfaceTitleBar(QWidget):
