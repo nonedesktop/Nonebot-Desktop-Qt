@@ -17,7 +17,7 @@ class InterfaceTitleBar(QWidget):
         self.__init_layout()
 
     def __init_widget(self):
-        self.setFixedHeight(120)
+        self.setFixedHeight(90)
 
     def __init_layout(self):
         # self.setContentsMargins(36, 28, 36, 12)
