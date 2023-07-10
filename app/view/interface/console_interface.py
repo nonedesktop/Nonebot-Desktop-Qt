@@ -13,7 +13,7 @@ class ConsoleLogView(TextEdit):
         # TODO 添加日志的实际方法和设计日志的样式
 
     def __init_widget(self):
-        self.setReadOnly = True
+        self.setReadOnly(True)
 
 
 class ConsoleInterface(QFrame):
