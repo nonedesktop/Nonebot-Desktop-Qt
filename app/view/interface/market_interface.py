@@ -58,6 +58,12 @@ class ExtensionCardView(QWidget):
 
     def __init_sub_widget_layout(self):
         # init command_bar_container widget layout
+        # TODO Adjustting the layout and subwidgets size
+        # self.command_bar_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        # self.search_line_edit.setMaximumWidth(260)
+        # self.plugin_lable_button.setMaximumWidth(80)
+        # self.adapter_lable_button.setMaximumWidth(120)
+        # self.certified_extensions_lable_button.setMaximumWidth(120)
         self.command_bar_container_layout_manager.addWidget(self.search_line_edit)
         self.command_bar_container_layout_manager.addWidget(self.plugin_lable_button)
         self.command_bar_container_layout_manager.addWidget(self.adapter_lable_button)
@@ -77,7 +83,7 @@ class MarketInterface(ScrollArea):
         self.view_container = QWidget(self)
         # TODO 需要微调位置来适配Title Bar
         self.title_bar = InterfaceTitleBar(
-            "🛒扩展商店",
+            "扩展商店",
             "Enjoy all the extensions from the community, with our rich ecosystem of plugins",
             self,
         )

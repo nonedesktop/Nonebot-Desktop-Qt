@@ -6,7 +6,7 @@ from view.main_window import MainWindow
 class Controller:
     def __init__(self) -> None:
         self.ui_main_window = MainWindow()
-        self.set_window_theme(Theme.DARK)
+        self.set_window_theme(Theme.LIGHT)
 
     def init_window_geometry(self, w: int, h: int):
         main = self.ui_main_window

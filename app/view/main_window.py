@@ -1,4 +1,4 @@
-from qfluentwidgets import SplitFluentWindow, NavigationItemPosition
+from qfluentwidgets import FluentWindow, NavigationItemPosition
 from qfluentwidgets import FluentIcon as FI
 
 from view.interface import (
@@ -10,7 +10,7 @@ from view.interface import (
 from core.icon import MyFluentIcon as MFI
 
 
-class MainWindow(SplitFluentWindow):
+class MainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
         self.setObjectName("MainWindow")
