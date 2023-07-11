@@ -80,7 +80,7 @@ class MarketInterface(ScrollArea):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.view_container = QWidget(self)
+        self.view_container = QWidget()
         # TODO 需要微调位置来适配Title Bar
         self.title_bar = InterfaceTitleBar(
             "扩展商店",
