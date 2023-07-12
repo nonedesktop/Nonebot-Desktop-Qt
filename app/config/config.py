@@ -12,10 +12,10 @@ from .constan import Language
 
 
 class LanguageSerializer(ConfigSerializer):
-    def serialize(self, language: Language):
+    def serialize(self, language: Language) -> str:
         return language.value.name() if language != Language.AUTO else "Auto"
 
-    def deserialize(self, lanuage: str):
+    def deserialize(self, lanuage: str) -> Language:
         return Language(QLocale(lanuage)) if lanuage != "Auto" else Language.AUTO
 
 
