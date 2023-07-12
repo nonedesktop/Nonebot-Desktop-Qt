@@ -2,6 +2,7 @@ from qfluentwidgets import ScrollArea, ExpandLayout, SettingCardGroup, PrimaryPu
 from qfluentwidgets import FluentIcon as FI
 from PySide6.QtWidgets import QLabel, QWidget
 
+from core import StyleSheet
 from config import Config
 
 
@@ -28,8 +29,10 @@ class SettingInterface(ScrollArea):
 
     def __init_widget(self):
         self.setObjectName("SettingInterface")
+        self.view_container.setObjectName("SettingInterfaceViewContainer")
         self.setWidget(self.view_container)
         self.setWidgetResizable(True)
+        StyleSheet.SETTING_INTERFACE.apply(self)
 
     def __init_sub_widget(self):
         pass

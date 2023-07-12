@@ -1,0 +1,8 @@
+QScrollArea {
+    border: none;
+}
+
+#SettingInterface,
+#SettingInterfaceViewContainer {
+    background-color: transparent;
+}
