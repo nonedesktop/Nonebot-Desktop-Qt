@@ -6,15 +6,15 @@ class MainWindow(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         card = ExtensionCard(
-            "服务器状态查看",
-            "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
+            "nonebot_plugin_status",
+            "nonebot-plugin-status",
             "服务器状态查看",
             "通过戳一戳获取服务器状态",
             "yanyongyu",
             "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
-            ["t:server"],
+            [{"label": "t:server", "color": "#f12020"}],
             True,
-            "Plugin",
+            "application",
             None,
             self
         )
