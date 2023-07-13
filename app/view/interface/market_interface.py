@@ -20,20 +20,14 @@ class ExtensionCardView(QWidget):
         self.search_line_edit = SearchLineEdit(self)
         self.plugin_lable_button = PillPushButton("插件", self, FluentIcon.TAG)
         self.adapter_lable_button = PillPushButton("适配器", self, FluentIcon.TAG)
-        self.certified_extensions_lable_button = PillPushButton(
-            "官方认证", self, FluentIcon.TAG
-        )
+        self.certified_extensions_lable_button = PillPushButton("官方认证", self, FluentIcon.TAG)
         self.card_view_container = SmoothScrollArea(self)
         self.card_view_content = QWidget(self.card_view_container)
         self.command_bar_container = QFrame(self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
-        self.card_view_content_layout_manager = FlowLayout(
-            self.card_view_content, True, True
-        )
-        self.command_bar_container_layout_manager = QHBoxLayout(
-            self.command_bar_container
-        )
+        self.card_view_content_layout_manager = FlowLayout(self.card_view_content, True, True)
+        self.command_bar_container_layout_manager = QHBoxLayout(self.command_bar_container)
         # Instantiating data and data structures
         self.extension_cards: list[ExtensionCard] = []
         # TODO 实现一个前缀搜索树 Trie Tree

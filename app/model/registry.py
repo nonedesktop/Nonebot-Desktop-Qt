@@ -38,6 +38,7 @@ class CommonInfo(BaseModel):
 
 class PluginInfo(CommonInfo):
     """Plugin info model"""
+
     # Some plugins are still not prepared for these metadata, so `None` is still needed
     # for now, until the registry is ready for all plugins.
 

@@ -1,4 +1,4 @@
-# The idea here is that our plugins always have two states, 
+# The idea here is that our plugins always have two states,
 # installed and uninstalled,
 # and in the future maybe include enabled and disabled, etc...
 # Do you see a problem? We're always in a finite state,
