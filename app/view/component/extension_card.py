@@ -24,26 +24,27 @@ class ExtensionCard(CardWidget):
         parent=None,
     ):
         super().__init__(parent=parent)
-        """Name for importing"""
+
         self.module_name = module_name
-        """Name for downloading from PyPI"""
+        """Name for importing"""
         self.project_link = project_link
-        """Human-readable name"""
+        """Name for downloading from PyPI"""
         self.name = name
-        """Description"""
+        """Human-readable name"""
         self.desc = desc
-        """Author"""
+        """Description"""
         self.author = author
-        """Project homepage"""
+        """Author"""
         self.homepage = homepage
-        """Tags"""
+        """Project homepage"""
         self.tags = tags
-        """Whether an extension is official"""
+        """Tags"""
         self.is_official = is_official
-        """Plugin category"""
+        """Whether an extension is official"""
         self.type = type
-        """Supported adapters"""
+        """Plugin category"""
         self.supported_adapters = supported_adapters
+        """Supported adapters"""
 
         # Instantiating widgets
         self.title_lable = QLabel(name, self)
