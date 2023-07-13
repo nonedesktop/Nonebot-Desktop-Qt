@@ -74,7 +74,7 @@ class ExtensionCard(CardWidget):
 
     def __init_layout(self):
         self.setFixedSize(360, 180)
-        self.layout_mannager.setContentsMargins(24, 24, 0, 13)
+        self.layout_mannager.setContentsMargins(24, 12, 6, 12)
         self.layout_mannager.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.pypi_info_bar_layout_mannager.addWidget(self.pypi_icon)
