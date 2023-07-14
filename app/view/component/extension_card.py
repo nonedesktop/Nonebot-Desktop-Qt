@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import (
     QLabel,
     QHBoxLayout,
+    QTextBrowser,
     QVBoxLayout,
 )
 from PySide6.QtCore import Qt
@@ -48,7 +49,7 @@ class ExtensionCard(CardWidget):
 
         # Instantiating widgets
         self.title_label = QLabel(name, self)
-        self.content_label = QLabel(desc, self)
+        self.content_label = QTextBrowser(self)
         self.pypi_label = QLabel(project_link, self)
         self.author_label = QLabel(author, self)
         self.author_icon = IconWidget(FI.PEOPLE, self)
@@ -71,11 +72,28 @@ class ExtensionCard(CardWidget):
         pass
 
     def __init_sub_widget(self):
-        pass
+        title_font = self.title_label.font()
+        title_font.setPointSize(12)
+        self.title_label.setFont(title_font)
+        self.title_label.setToolTip("非官方插件")
+        if self.is_official:
+            self.title_label.setText(
+                "<html><head/><body><p><span style=\" color:#0cd50c;\">"
+                f"{self.name}</span></p></body></html>"
+            )
+            self.title_label.setToolTip("官方插件")
+
+        self.content_label.setText(self.desc)
+        self.content_label.setFrameStyle(0)
+        # The annotation says that it accepts an int parameter,
+        # but besides this there is no more information.
+        # Maybe I should find and read Qt's documents.
+
+        self.pypi_label.setToolTip(self.module_name)
 
     def __init_layout(self):
-        self.setFixedSize(360, 180)
-        self.layout_mannager.setContentsMargins(24, 12, 6, 12)
+        self.setFixedSize(360, 168)
+        self.layout_mannager.setContentsMargins(16, 12, 12, 12)
         self.layout_mannager.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.pypi_info_bar_layout_mannager.addWidget(self.pypi_icon)
@@ -88,11 +106,11 @@ class ExtensionCard(CardWidget):
         self.layout_mannager.addWidget(self.content_label)
         self.layout_mannager.addLayout(self.pypi_info_bar_layout_mannager)
         self.layout_mannager.addLayout(self.author_info_bar_layout_mannager)
-        self.github_icon.move(320, 140)
+        self.github_icon.move(320, 128)
 
         # vbox layout:
         #     label title
-        #     label content
+        #     textbrowser content
         #     hbox pypi_info:
         #         icon pypi_icon
         #         label pypi_name
@@ -105,3 +123,5 @@ class ExtensionCard(CardWidget):
         self.pypi_icon.setFixedSize(16, 16)
         self.author_icon.setFixedSize(16, 16)
         self.github_icon.setFixedSize(28, 28)
+
+    # TODO: Click vbox to perform installation (ask users)
