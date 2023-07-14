@@ -19,7 +19,7 @@ class SettingInterface(ScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        # TODO Add Title Lable
+        # TODO Add Title label
         self.appearance_setting_group = SettingCardGroup("外观和行为", self)
         self.theme_setting_card = OptionsSettingCard(
             Config.themeMode, FI.BRUSH, "主题模式", "选择你的主题模式", ["浅色", "深色", "跟随系统"], self.appearance_setting_group

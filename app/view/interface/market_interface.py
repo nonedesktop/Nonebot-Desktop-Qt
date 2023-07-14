@@ -18,9 +18,9 @@ class ExtensionCardView(QWidget):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.search_line_edit = SearchLineEdit(self)
-        self.plugin_lable_button = PillPushButton("插件", self, FluentIcon.TAG)
-        self.adapter_lable_button = PillPushButton("适配器", self, FluentIcon.TAG)
-        self.certified_extensions_lable_button = PillPushButton("官方认证", self, FluentIcon.TAG)
+        self.plugin_label_button = PillPushButton("插件", self, FluentIcon.TAG)
+        self.adapter_label_button = PillPushButton("适配器", self, FluentIcon.TAG)
+        self.certified_extensions_label_button = PillPushButton("官方认证", self, FluentIcon.TAG)
         self.card_view_container = SmoothScrollArea(self)
         self.card_view_content = QWidget(self.card_view_container)
         self.command_bar_container = QFrame(self)
@@ -55,13 +55,13 @@ class ExtensionCardView(QWidget):
         # TODO Adjustting the layout and subwidgets size
         # self.command_bar_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignLeft)
         # self.search_line_edit.setMaximumWidth(260)
-        # self.plugin_lable_button.setMaximumWidth(80)
-        # self.adapter_lable_button.setMaximumWidth(120)
-        # self.certified_extensions_lable_button.setMaximumWidth(120)
+        # self.plugin_label_button.setMaximumWidth(80)
+        # self.adapter_label_button.setMaximumWidth(120)
+        # self.certified_extensions_label_button.setMaximumWidth(120)
         self.command_bar_container_layout_manager.addWidget(self.search_line_edit)
-        self.command_bar_container_layout_manager.addWidget(self.plugin_lable_button)
-        self.command_bar_container_layout_manager.addWidget(self.adapter_lable_button)
-        self.command_bar_container_layout_manager.addWidget(self.certified_extensions_lable_button)
+        self.command_bar_container_layout_manager.addWidget(self.plugin_label_button)
+        self.command_bar_container_layout_manager.addWidget(self.adapter_label_button)
+        self.command_bar_container_layout_manager.addWidget(self.certified_extensions_label_button)
         # init card_view_container widget layout
         self.card_view_container.setViewportMargins(2, 5, 2, 5)
         # init card_view_content widget layout

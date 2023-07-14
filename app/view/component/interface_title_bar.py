@@ -8,8 +8,8 @@ class InterfaceTitleBar(QWidget):
     def __init__(self, title: str, subtitle: str, parent=None):
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_lable = InterfaceTitle(title, self)
-        self.subtitle_lable = InterfaceDesc(subtitle, self)
+        self.title_label = InterfaceTitle(title, self)
+        self.subtitle_label = InterfaceDesc(subtitle, self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout
@@ -22,5 +22,5 @@ class InterfaceTitleBar(QWidget):
     def __init_layout(self):
         # self.setContentsMargins(36, 28, 36, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.layout_manager.addWidget(self.title_lable)
-        self.layout_manager.addWidget(self.subtitle_lable)
+        self.layout_manager.addWidget(self.title_label)
+        self.layout_manager.addWidget(self.subtitle_label)

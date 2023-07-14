@@ -47,10 +47,10 @@ class ExtensionCard(CardWidget):
         """Supported adapters"""
 
         # Instantiating widgets
-        self.title_lable = QLabel(name, self)
-        self.content_lable = QLabel(desc, self)
-        self.pypi_lable = QLabel(module_name, self)
-        self.author_lable = QLabel(author, self)
+        self.title_label = QLabel(name, self)
+        self.content_label = QLabel(desc, self)
+        self.pypi_label = QLabel(project_link, self)
+        self.author_label = QLabel(author, self)
         self.author_icon = IconWidget(FI.PEOPLE, self)
         self.pypi_icon = IconWidget(FI.FINGERPRINT, self)
         self.github_icon = IconWidget(FI.GITHUB, self)
@@ -79,16 +79,27 @@ class ExtensionCard(CardWidget):
         self.layout_mannager.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.pypi_info_bar_layout_mannager.addWidget(self.pypi_icon)
-        self.pypi_info_bar_layout_mannager.addWidget(self.pypi_lable)
+        self.pypi_info_bar_layout_mannager.addWidget(self.pypi_label)
 
         self.author_info_bar_layout_mannager.addWidget(self.author_icon)
-        self.author_info_bar_layout_mannager.addWidget(self.author_lable)
+        self.author_info_bar_layout_mannager.addWidget(self.author_label)
 
-        self.layout_mannager.addWidget(self.title_lable)
-        self.layout_mannager.addWidget(self.content_lable)
+        self.layout_mannager.addWidget(self.title_label)
+        self.layout_mannager.addWidget(self.content_label)
         self.layout_mannager.addLayout(self.pypi_info_bar_layout_mannager)
         self.layout_mannager.addLayout(self.author_info_bar_layout_mannager)
         self.github_icon.move(320, 140)
+
+        # vbox layout:
+        #     label title
+        #     label content
+        #     hbox pypi_info:
+        #         icon pypi_icon
+        #         label pypi_name
+        #     hbox author_info:
+        #         icon author_icon
+        #         label author_name
+        # icon gh_icon
 
     def __init_sub_widget_layout(self):
         self.pypi_icon.setFixedSize(16, 16)
