@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
 )
 from PySide6.QtCore import Qt
-from qfluentwidgets import CardWidget, IconWidget
+from qfluentwidgets import CardWidget, IconWidget, PrimaryPushButton
 from qfluentwidgets import FluentIcon as FI
 
 
@@ -55,6 +55,7 @@ class ExtensionCard(CardWidget):
         self.author_icon = IconWidget(FI.PEOPLE, self)
         self.pypi_icon = IconWidget(FI.FINGERPRINT, self)
         self.github_icon = IconWidget(FI.GITHUB, self)
+        self.mannage_button = PrimaryPushButton("MANNAGE", self)
         # TODO MORE WIDGETS
 
         # Instantiating layouts
@@ -91,6 +92,14 @@ class ExtensionCard(CardWidget):
 
         self.pypi_label.setToolTip(self.module_name)
 
+
+        # Here we depens on the status to modfiy the button's text:
+        # if installed set uninstall
+        # if uninstalled set install
+        # we get the status from instance globe status object
+        
+        # self.mannage_button.setText()
+
     def __init_layout(self):
         self.setFixedSize(360, 168)
         self.layout_mannager.setContentsMargins(16, 12, 12, 12)
@@ -109,6 +118,7 @@ class ExtensionCard(CardWidget):
         self.layout_mannager.addLayout(self.pypi_info_bar_layout_mannager)
         self.layout_mannager.addLayout(self.author_info_bar_layout_mannager)
         self.github_icon.move(320, 128)
+        self.mannage_button.move(220, 128) # 临时放在这里
 
         # vbox layout:
         #     label title
