@@ -8,7 +8,7 @@ from qfluentwidgets import (
     SwitchSettingCard,
 )
 from qfluentwidgets import FluentIcon as FI
-from PySide6.QtWidgets import QLabel, QWidget
+from PySide6.QtWidgets import QLabel, QWidget, QMessageBox
 
 from core import StyleSheet
 from config import Config
@@ -45,6 +45,8 @@ class SettingInterface(ScrollArea):
         self.__init_sub_widget()
         self.__init_layout()
         self.__init_sub_widget_layout()
+        # Initialize slot connection
+        self.__init_signal_connection()
 
     def __init_widget(self):
         self.setObjectName("SettingInterface")
@@ -67,3 +69,6 @@ class SettingInterface(ScrollArea):
             [self.theme_setting_card, self.language_setting_card, self.auto_update_setting_card]
         )
         self.about_setting_group.addSettingCards([self.about_card, self.about_qt_card])
+
+    def __init_signal_connection(self):
+        self.about_qt_card.clicked.connect(lambda: QMessageBox.aboutQt(self, "关于 Qt"))
