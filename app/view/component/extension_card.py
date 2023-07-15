@@ -97,9 +97,11 @@ class ExtensionCard(CardWidget):
         self.layout_mannager.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.pypi_info_bar_layout_mannager.addWidget(self.pypi_icon)
+        self.pypi_info_bar_layout_mannager.addSpacing(2)
         self.pypi_info_bar_layout_mannager.addWidget(self.pypi_label)
 
         self.author_info_bar_layout_mannager.addWidget(self.author_icon)
+        self.author_info_bar_layout_mannager.addSpacing(2)
         self.author_info_bar_layout_mannager.addWidget(self.author_label)
 
         self.layout_mannager.addWidget(self.title_label)
