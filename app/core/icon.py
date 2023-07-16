@@ -14,4 +14,5 @@ class MyFluentIcon(FluentIconBase, Enum):
     CHECKNOTPASS = "CheckNotPass"
 
     def path(self, theme=Theme.AUTO):
-        return f"./app/res/icons/{self.value}_{getIconColor(theme)}.svg"
+        theme_remap = {"black": "dark", "white": "light"}[getIconColor(theme)]
+        return f"./app/res/icons/{self.value}_{theme_remap}.svg"
