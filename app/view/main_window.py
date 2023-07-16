@@ -7,7 +7,7 @@ from view.interface import (
     ConsoleInterface,
     SettingInterface,
 )
-from core.icon import MyFluentIcon as MFI
+from core import MyFluentIcon as MFI
 
 
 class MainWindow(FluentWindow):
