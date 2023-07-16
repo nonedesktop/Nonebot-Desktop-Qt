@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout
-from extension_card import ExtensionCard
+from view.component  import ExtensionCard
 
 
 class MainWindow(QWidget):
@@ -9,14 +9,14 @@ class MainWindow(QWidget):
             "nonebot_plugin_status",
             "nonebot-plugin-status",
             "服务器状态查看",
-            "通过戳一戳获取服务器状态",
+            "通过戳一戳查看服务器状态通过戳一戳查看服务器状态通过戳一戳查看服务器状态",
             "yanyongyu",
             "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
             [{"label": "t:server", "color": "#f12020"}],
             True,
             "application",
             None,
-            self
+            self,
         )
 
         self.layout_mannager = QVBoxLayout(self)
