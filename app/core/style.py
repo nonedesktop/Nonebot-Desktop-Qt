@@ -6,6 +6,7 @@ from qfluentwidgets import StyleSheetBase, Theme, qconfig
 class StyleSheet(StyleSheetBase, Enum):
     MARKET_INTERFACE = "MARKET_INTERFACE"
     SETTING_INTERFACE = "SETTING_INTERFACE"
+    EXTENSION_CARD = "EXTENSION_CARD"
 
     def path(self, theme=Theme.AUTO):
         if theme == Theme.AUTO:
