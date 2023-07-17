@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel
 
 
@@ -46,4 +47,10 @@ class PluginInfo(CommonInfo):
     """Plugin category"""
 
     supported_adapters: list[str] | None
-    """Supported adapters"""
+    """Supported adapters, `None` for all adapters"""
+
+    valid: bool
+    """Plugin load test result"""
+
+    time: datetime
+    """Plugin load test time"""

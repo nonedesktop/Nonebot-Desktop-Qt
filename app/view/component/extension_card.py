@@ -1,6 +1,7 @@
+from PySide6.QtGui import QDesktopServices
 from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 from PySide6.QtCore import Qt
-from qfluentwidgets import CardWidget, IconWidget, PrimaryPushButton
+from qfluentwidgets import CardWidget, IconWidget
 from qfluentwidgets import FluentIcon as FI
 
 from core import StyleSheet
@@ -19,7 +20,9 @@ class ExtensionCard(CardWidget):
         tags: list[dict[{"label": str, "color": str}]],
         is_official: bool,
         type: str,
-        supported_adapters: list[str] | None = None,
+        supported_adapters: list[str] | None,
+        valid: bool,
+        time: str,
         parent=None,
     ):
         super().__init__(parent=parent)
@@ -44,6 +47,12 @@ class ExtensionCard(CardWidget):
         """Plugin category"""
         self.supported_adapters = supported_adapters
         """Supported adapters"""
+        self.valid = valid
+        """Plugin load test result"""
+        self.time = time
+        """Plugin load test time"""
+        # TODO: use pydantic model instead of bunches of params
+
         # Instantiating widgets
         self.title_label = QLabel(name, self)
         self.content_label = QLabel(self.desc, self)
@@ -54,7 +63,7 @@ class ExtensionCard(CardWidget):
         self.github_icon = IconWidget(FI.GITHUB, self)
         # self.mannage_button = PrimaryPushButton("MANNAGE", self)
         self.offical_mark_icon = IconWidget(MFI.NOTOFFICALMARK, self)
-        self.check_mark_icon = IconWidget(MFI.CHECKPASS, self)
+        self.check_mark_icon = IconWidget(MFI.CHECKNOTPASS, self)
         # TODO MORE WIDGETS
         # Instantiating layouts
         self.layout_mannager = QVBoxLayout(self)
@@ -81,6 +90,23 @@ class ExtensionCard(CardWidget):
         self.pypi_label.setObjectName("ExtensionCardPypiLabel")
         # Set widgets options
         self.content_label.setWordWrap(True)
+        # Set tooltips
+        self.offical_mark_icon.setToolTip("非官方认证")
+        self.check_mark_icon.setToolTip("测试未通过")
+        # Update status badges
+        if self.is_official:
+            self.offical_mark_icon.setIcon(MFI.OFFICALMARK)
+            self.offical_mark_icon.setToolTip("官方认证")
+        if self.valid:
+            self.check_mark_icon.setIcon(MFI.CHECKPASS)
+            self.check_mark_icon.setToolTip("测试通过")
+        # Set urlopen
+        self.github_icon.mouseReleaseEvent = (
+            lambda event:
+            (None, QDesktopServices.openUrl(self.homepage))[0]
+        )
+        self.github_icon.setToolTip("前往项目主页")
+        self.github_icon.setCursor(Qt.CursorShape.PointingHandCursor)
 
     def __init_layout(self):
         # Set layout options

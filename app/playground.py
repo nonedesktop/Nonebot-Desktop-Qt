@@ -16,34 +16,40 @@ class MainWindow(QWidget):
             True,
             "application",
             None,
+            True,
+            "2023-06-26T21:53:28.908452+08:00",
             self,
         )
 
         card2 = ExtensionCard(
-            "nonebot-plugin-docs",
+            "nonebot_plugin_docs",
             "nonebot-plugin-docs",
             "NoneBot离线文档",
             "在本地浏览NoneBot文档",
             "nonebot",
-            "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
+            "https://github.com/nonebot/nonebot2/tree/master/packages/nonebot-plugin-docs",
             [{"label": "t:server", "color": "#f12020"}],
             True,
             "application",
             None,
+            False,
+            "2023-06-26T21:54:14.646379+08:00",
             self,
         )
 
         card3 = ExtensionCard(
-            "nonebot-plugin-fortune",
+            "nonebot_plugin_fortune",
             "nonebot-plugin-fortune",
             "今日运势",
             "抽签！抽取你的今日运势🙏",
             "KafCoppelia",
-            "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
+            "https://github.com/MinatoAquaCrews/nonebot_plugin_fortune",
             [{"label": "t:server", "color": "#f12020"}],
-            True,
+            False,
             "application",
             None,
+            True,
+            "2023-07-16T00:01:41.186448+08:00",
             self,
         )
 
