@@ -53,7 +53,7 @@ class ExtensionCard(CardWidget):
         self.pypi_icon = IconWidget(FI.FINGERPRINT, self)
         self.github_icon = IconWidget(FI.GITHUB, self)
         # self.mannage_button = PrimaryPushButton("MANNAGE", self)
-        self.offical_mark_icon = IconWidget(MFI.OFFICALMARK, self)
+        self.offical_mark_icon = IconWidget(MFI.NOTOFFICALMARK, self)
         self.check_mark_icon = IconWidget(MFI.CHECKPASS, self)
         # TODO MORE WIDGETS
         # Instantiating layouts
