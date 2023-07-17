@@ -103,6 +103,7 @@ class ExtensionCard(CardWidget):
         self.author_icon.setFixedSize(14, 14)
         self.github_icon.setFixedSize(28, 28)
         # Place header bar layout widgets
+        self.header_bar_layout_manager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.header_bar_layout_manager.addWidget(self.title_label)
         self.header_bar_layout_manager.addWidget(self.offical_mark_icon)
         self.header_bar_layout_manager.addWidget(self.check_mark_icon)
