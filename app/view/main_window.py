@@ -4,6 +4,7 @@ from qfluentwidgets import FluentIcon as FI
 from view.interface import (
     InterfaceTemplates,
     MarketInterface,
+    InstanceInterface,
     ConsoleInterface,
     SettingInterface,
 )
@@ -20,7 +21,7 @@ class MainWindow(FluentWindow):
 
     def __createSubInterface(self):
         self.home_interface = InterfaceTemplates("HomeInterface", "看板子界面", self)
-        self.instance_interface = InterfaceTemplates("InstanceInterface", "实例管理子界面", self)
+        self.instance_interface = InstanceInterface(self)
         self.market_interface = MarketInterface(self)
         self.global_instance_interface = InterfaceTemplates("GlobalInstanceSelection", "选择全局实例子界面", self)
         self.console_interface = ConsoleInterface(self)
