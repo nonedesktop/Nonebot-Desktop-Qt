@@ -75,7 +75,6 @@ class MarketInterface(ScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        # TODO 需要微调位置来适配Title Bar
         self.title_bar = InterfaceTitleBar(
             "扩展商店",
             "Enjoy all the extensions from the community, with our rich ecosystem of plugins",
@@ -103,10 +102,10 @@ class MarketInterface(ScrollArea):
         # 需要微调位置来适配
         # self.setViewportMargins(0, self.title_bar.height(), 0, 0)
         self.setWidget(self.view_container)
-        self.view_container_layout_manager.setSpacing(4)
         self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.view_container_layout_manager.setContentsMargins(36, 20, 36, 36)
+        self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_manager.addWidget(self.title_bar)
+        self.view_container_layout_manager.setSpacing(4)
         self.view_container_layout_manager.addWidget(self.extension_card_view)
 
     def resizeEvent(self, event):

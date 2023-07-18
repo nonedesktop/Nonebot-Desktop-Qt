@@ -32,7 +32,8 @@ class ConsoleInterface(QFrame):
         self.setObjectName("ConsoleInterface")
 
     def __init_layout(self):
-        self.layout_manager.setContentsMargins(36, 32, 36, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_manager.setContentsMargins(36, 20, 36, 12)
         self.layout_manager.addWidget(self.title_bar)
+        self.layout_manager.setSpacing(4)
         self.layout_manager.addWidget(self.console_log_view)
