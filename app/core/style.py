@@ -5,6 +5,7 @@ from qfluentwidgets import StyleSheetBase, Theme, qconfig
 
 class StyleSheet(StyleSheetBase, Enum):
     MARKET_INTERFACE = "MARKET_INTERFACE"
+    INSTANCE_INTERFACE = "INSTANCE_INTERFACE"
     SETTING_INTERFACE = "SETTING_INTERFACE"
     EXTENSION_CARD = "EXTENSION_CARD"
 

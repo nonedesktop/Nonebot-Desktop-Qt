@@ -1,0 +1,9 @@
+QScrollArea {
+    border: none;
+}
+
+#InstanceInterface,
+#InstanceInterfaceTitleBar,
+#InstanceInterfaceViewContainer {
+    background-color: transparent;
+}
