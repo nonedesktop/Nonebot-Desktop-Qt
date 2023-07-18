@@ -8,7 +8,8 @@ from qfluentwidgets import (
     SwitchSettingCard,
 )
 from qfluentwidgets import FluentIcon as FI
-from PySide6.QtWidgets import QLabel, QWidget, QMessageBox
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QWidget, QMessageBox
 
 from core import StyleSheet
 from config import Config
@@ -19,7 +20,6 @@ class SettingInterface(ScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        # TODO Add Title label
         self.appearance_setting_group = SettingCardGroup("外观和行为", self)
         self.theme_setting_card = OptionsSettingCard(
             Config.themeMode, FI.BRUSH, "主题模式", "选择你的主题模式", ["浅色", "深色", "跟随系统"], self.appearance_setting_group
@@ -36,7 +36,9 @@ class SettingInterface(ScrollArea):
             FI.UPDATE, "自动检查更新", "在启动时自动检查更新", Config.is_auto_update, self.appearance_setting_group
         )
         self.about_setting_group = SettingCardGroup("关于", self)
-        self.feedback_card = PrimaryPushSettingCard("反馈", FI.FEEDBACK, "反馈", "发现了BUG？想添加新功能？请告诉我们！", self.about_setting_group)
+        self.feedback_card = PrimaryPushSettingCard(
+            "反馈", FI.FEEDBACK, "反馈", "发现了BUG？想添加新功能？请告诉我们！", self.about_setting_group
+        )
         self.about_card = PrimaryPushSettingCard("关于", FI.INFO, "关于", "关于本程序", self.about_setting_group)
         self.about_qt_card = PrimaryPushSettingCard("关于 Qt", FI.INFO, "关于 Qt", "Qt 的许可证和授权自述", self.about_setting_group)
         # Instantiating layouts
@@ -60,8 +62,8 @@ class SettingInterface(ScrollArea):
         pass
 
     def __init_layout(self):
-        self.view_container_layout_mannager.setContentsMargins(36, 10, 36, 0)
-        self.view_container_layout_mannager.setSpacing(28)
+        self.view_container_layout_mannager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.view_container_layout_mannager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_mannager.addWidget(self.appearance_setting_group)
         self.view_container_layout_mannager.addWidget(self.about_setting_group)
 

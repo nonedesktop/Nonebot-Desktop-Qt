@@ -20,7 +20,7 @@ class ConsoleInterface(QFrame):
     def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_bar = InterfaceTitleBar("Console Log", "Check the log output of all instances", self)
+        self.title_bar = InterfaceTitleBar("日志", "Check the log output of all instances", self)
         self.console_log_view = ConsoleLogView(self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
