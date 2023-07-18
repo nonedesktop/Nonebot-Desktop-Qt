@@ -1,3 +1,4 @@
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QFrame, QVBoxLayout
 from PySide6.QtCore import Qt
 from qfluentwidgets import TextEdit
@@ -14,6 +15,26 @@ class ConsoleLogView(TextEdit):
 
     def __init_widget(self):
         self.setReadOnly(True)
+        self.setText(
+            "Violet - NoneBot2 Desktop Application\n"
+            "2023 NoneDesktop\n"
+        )
+        self.setFont(
+            [
+                "Iosevka Term",
+                "Sarasa Term SC",
+                "Consolas",
+                "Noto Sans Mono CJK SC",
+                "Microsoft YaHei UI",
+                "Monospace",
+            ]
+        )
+        self.setFontPointSize(10)
+        self.setFontWeight(QFont.Weight.Medium)
+
+        # assume after loading
+        self.append("就绪")
+        # 'append' operation will add a new line automatically
 
 
 class ConsoleInterface(QFrame):
