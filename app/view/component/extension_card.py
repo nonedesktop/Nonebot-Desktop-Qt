@@ -1,7 +1,7 @@
 from PySide6.QtGui import QDesktopServices
-from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 from PySide6.QtCore import Qt
-from qfluentwidgets import CardWidget, IconWidget
+from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
+from qfluentwidgets import CardWidget, IconWidget, PrimaryPushButton
 from qfluentwidgets import FluentIcon as FI
 
 from core import StyleSheet
@@ -60,11 +60,10 @@ class ExtensionCard(CardWidget):
         self.author_label = QLabel(author, self)
         self.author_icon = IconWidget(FI.PEOPLE, self)
         self.pypi_icon = IconWidget(FI.FINGERPRINT, self)
-        self.github_icon = IconWidget(FI.GITHUB, self)
-        # self.mannage_button = PrimaryPushButton("MANNAGE", self)
         self.offical_mark_icon = IconWidget(MFI.NOTOFFICALMARK, self)
         self.check_mark_icon = IconWidget(MFI.CHECKNOTPASS, self)
-        # TODO MORE WIDGETS
+        self.mannage_button = PrimaryPushButton("安装", self)
+        self.github_icon = IconWidget(FI.GITHUB, self)
         # Instantiating layouts
         self.layout_mannager = QVBoxLayout(self)
         self.header_bar_layout_manager = QHBoxLayout()
@@ -101,10 +100,7 @@ class ExtensionCard(CardWidget):
             self.check_mark_icon.setIcon(MFI.CHECKPASS)
             self.check_mark_icon.setToolTip("测试通过")
         # Set urlopen
-        self.github_icon.mouseReleaseEvent = (
-            lambda event:
-            (None, QDesktopServices.openUrl(self.homepage))[0]
-        )
+        self.github_icon.mouseReleaseEvent = lambda event: (None, QDesktopServices.openUrl(self.homepage))[0]
         self.github_icon.setToolTip("前往项目主页")
         self.github_icon.setCursor(Qt.CursorShape.PointingHandCursor)
 
@@ -118,8 +114,8 @@ class ExtensionCard(CardWidget):
         self.layout_mannager.addWidget(self.content_label)
         self.layout_mannager.addLayout(self.pypi_info_bar_layout_mannager)
         self.layout_mannager.addLayout(self.author_info_bar_layout_mannager)
+        self.mannage_button.move(240, 128)
         self.github_icon.move(320, 128)
-        # self.mannage_button.move(220, 128)  # 临时放在这里
 
     def __init_sub_widget_layout(self):
         self.offical_mark_icon.setFixedSize(22, 22)
@@ -127,6 +123,7 @@ class ExtensionCard(CardWidget):
         self.content_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.pypi_icon.setFixedSize(14, 14)
         self.author_icon.setFixedSize(14, 14)
+        self.mannage_button.setFixedSize(64, 28)
         self.github_icon.setFixedSize(28, 28)
         # Place header bar layout widgets
         self.header_bar_layout_manager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
