@@ -99,8 +99,6 @@ class MarketInterface(ScrollArea):
         self.title_bar.setObjectName("MarketInterfaceTitleBar")
 
     def __init_layout(self):
-        # 需要微调位置来适配
-        # self.setViewportMargins(0, self.title_bar.height(), 0, 0)
         self.setWidget(self.view_container)
         self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)

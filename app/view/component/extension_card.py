@@ -65,7 +65,7 @@ class ExtensionCard(CardWidget):
         self.mannage_button = PrimaryPushButton("安装", self)
         self.github_icon = IconWidget(FI.GITHUB, self)
         # Instantiating layouts
-        self.layout_mannager = QVBoxLayout(self)
+        self.layout_manager = QVBoxLayout(self)
         self.header_bar_layout_manager = QHBoxLayout()
         self.pypi_info_bar_layout_mannager = QHBoxLayout()
         self.author_info_bar_layout_mannager = QHBoxLayout()
@@ -107,13 +107,13 @@ class ExtensionCard(CardWidget):
     def __init_layout(self):
         # Set layout options
         self.setFixedSize(360, 168)
-        self.layout_mannager.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
-        self.layout_mannager.setContentsMargins(16, 12, 12, 12)
+        self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout_manager.setContentsMargins(16, 12, 12, 12)
         # Place layout widgets
-        self.layout_mannager.addLayout(self.header_bar_layout_manager)
-        self.layout_mannager.addWidget(self.content_label)
-        self.layout_mannager.addLayout(self.pypi_info_bar_layout_mannager)
-        self.layout_mannager.addLayout(self.author_info_bar_layout_mannager)
+        self.layout_manager.addLayout(self.header_bar_layout_manager)
+        self.layout_manager.addWidget(self.content_label)
+        self.layout_manager.addLayout(self.pypi_info_bar_layout_mannager)
+        self.layout_manager.addLayout(self.author_info_bar_layout_mannager)
         self.mannage_button.move(240, 128)
         self.github_icon.move(320, 128)
 
