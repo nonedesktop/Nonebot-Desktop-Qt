@@ -57,7 +57,6 @@ class InstanceInterface(ScrollArea):
 
     def __init_sub_widget(self):
         self.view_container.setObjectName("InstanceInterfaceViewContainer")
-        self.title_bar.setObjectName("InstanceInterfaceTitleBar")
 
     def __init_layout(self):
         self.setWidget(self.view_container)

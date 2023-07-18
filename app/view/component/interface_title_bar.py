@@ -18,9 +18,9 @@ class InterfaceTitleBar(QWidget):
 
     def __init_widget(self):
         self.setFixedHeight(90)
+        self.setStyleSheet("background-color: transparent;")
 
     def __init_layout(self):
-        # self.setContentsMargins(36, 28, 36, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.layout_manager.addWidget(self.title_label)
         self.layout_manager.addWidget(self.subtitle_label)

@@ -3,7 +3,6 @@ QScrollArea {
 }
 
 #InstanceInterface,
-#InstanceInterfaceTitleBar,
 #InstanceInterfaceViewContainer {
     background-color: transparent;
 }

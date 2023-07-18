@@ -96,7 +96,6 @@ class MarketInterface(ScrollArea):
 
     def __init_sub_widget(self):
         self.view_container.setObjectName("MarketInterfaceViewContainer")
-        self.title_bar.setObjectName("MarketInterfaceTitleBar")
 
     def __init_layout(self):
         self.setWidget(self.view_container)

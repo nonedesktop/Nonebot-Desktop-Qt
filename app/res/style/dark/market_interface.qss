@@ -3,7 +3,6 @@ QScrollArea {
 }
 
 #MarketInterface,
-#MarketInterfaceTitleBar,
 #MarketInterfaceViewContainer {
     background-color: transparent;
 }
