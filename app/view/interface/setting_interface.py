@@ -36,6 +36,7 @@ class SettingInterface(ScrollArea):
             FI.UPDATE, "自动检查更新", "在启动时自动检查更新", Config.is_auto_update, self.appearance_setting_group
         )
         self.about_setting_group = SettingCardGroup("关于", self)
+        self.feedback_card = PrimaryPushSettingCard("反馈", FI.FEEDBACK, "反馈", "发现了BUG？想添加新功能？请告诉我们！", self.about_setting_group)
         self.about_card = PrimaryPushSettingCard("关于", FI.INFO, "关于", "关于本程序", self.about_setting_group)
         self.about_qt_card = PrimaryPushSettingCard("关于 Qt", FI.INFO, "关于 Qt", "Qt 的许可证和授权自述", self.about_setting_group)
         # Instantiating layouts
@@ -68,7 +69,8 @@ class SettingInterface(ScrollArea):
         self.appearance_setting_group.addSettingCards(
             [self.theme_setting_card, self.language_setting_card, self.auto_update_setting_card]
         )
-        self.about_setting_group.addSettingCards([self.about_card, self.about_qt_card])
+        self.about_setting_group.addSettingCards([self.feedback_card, self.about_card, self.about_qt_card])
 
     def __init_signal_connection(self):
+        self.feedback_card.clicked.connect(lambda: QMessageBox.information(self, "QDesktopService", "这里打开浏览器ISSUE"))
         self.about_qt_card.clicked.connect(lambda: QMessageBox.aboutQt(self, "关于 Qt"))
