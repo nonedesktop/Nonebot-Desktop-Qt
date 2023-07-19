@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QApplication, QVBoxLayout
-from view.component import ExtensionCard
+from view.component import ExtensionCard, InstanceCard
 
 
 class MainWindow(QWidget):
@@ -53,10 +53,13 @@ class MainWindow(QWidget):
             self,
         )
 
+        card4 = InstanceCard("Cai", "Yue89", "FastAPI", "GitHub")
+
         self.layout_mannager = QVBoxLayout(self)
         self.layout_mannager.addWidget(card1)
         self.layout_mannager.addWidget(card2)
         self.layout_mannager.addWidget(card3)
+        self.layout_mannager.addWidget(card4)
 
 
 if __name__ == "__main__":
