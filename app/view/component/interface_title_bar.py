@@ -1,15 +1,15 @@
 from PySide6.QtGui import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 
-from .label import InterfaceTitle, InterfaceDesc
+from .label import TitleLabel, BodyStrongLabel
 
 
 class InterfaceTitleBar(QWidget):
     def __init__(self, title: str, subtitle: str, parent=None):
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = InterfaceTitle(title, self)
-        self.subtitle_label = InterfaceDesc(subtitle, self)
+        self.title_label = TitleLabel(title, self)
+        self.subtitle_label = BodyStrongLabel(subtitle, self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout

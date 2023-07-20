@@ -1,9 +1,9 @@
 from qfluentwidgets import ScrollArea, PrimaryPushButton
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QFrame, QLabel, QHBoxLayout
 from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QFrame, QLabel
 
-from view.component import InterfaceTitleBar
 from core.style import StyleSheet
+from view.component import InterfaceTitleBar
 
 
 class InstanceCardView(QFrame):

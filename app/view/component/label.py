@@ -1,5 +1,5 @@
-from PySide6.QtGui import QFont
 from qfluentwidgets import FluentLabelBase
+from PySide6.QtGui import QFont
 
 
 def getFont(fontSize: int = 14, fontWeight: QFont.Weight = QFont.Weight.Normal) -> QFont:
@@ -10,11 +10,41 @@ def getFont(fontSize: int = 14, fontWeight: QFont.Weight = QFont.Weight.Normal) 
     return font
 
 
-class InterfaceTitle(FluentLabelBase):
+class CaptionLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=12, fontWeight=QFont.Weight.Normal)
+
+
+class BodyLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=14, fontWeight=QFont.Weight.Normal)
+
+
+class BodyStrongLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=14, fontWeight=QFont.Weight.Bold)
+
+
+class BodyLargeLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=18, fontWeight=QFont.Weight.Normal)
+
+
+class SubtitleLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=20, fontWeight=QFont.Weight.Bold)
+
+
+class TitleLabel(FluentLabelBase):
     def getFont(self) -> QFont:
         return getFont(fontSize=28, fontWeight=QFont.Weight.Bold)
 
 
-class InterfaceDesc(FluentLabelBase):
+class TitleLargeLabel(FluentLabelBase):
     def getFont(self) -> QFont:
-        return getFont(fontSize=14, fontWeight=QFont.Weight.Normal)
+        return getFont(fontSize=40, fontWeight=QFont.Weight.Bold)
+
+
+class DisplayLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=68, fontWeight=QFont.Weight.Bold)
