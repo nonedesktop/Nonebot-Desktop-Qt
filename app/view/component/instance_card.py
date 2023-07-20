@@ -3,15 +3,14 @@ from qfluentwidgets import FluentIcon as FI
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout
 
-from .label import CaptionLabel, BodyLabel
-
+from .label import CaptionLabel, BodyStrongLabel
 
 class InstanceCard(CardWidget):
     def __init__(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating Data Structures
         # Instantiating Widget Objects
-        self.instance_name_label = BodyLabel(instance_name, self)
+        self.instance_name_label = BodyStrongLabel(instance_name, self)
         self.instance_status_label = CaptionLabel("运行中", self)
         self.instance_status_icon = DotInfoBadge.success(self)
         self.instance_id_label = CaptionLabel(instance_id, self)

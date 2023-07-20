@@ -53,7 +53,7 @@ class MainWindow(QWidget):
             self,
         )
 
-        card4 = InstanceCard("未命名实例1", "Yue89", "FastAPI", "GitHub")
+        card4 = InstanceCard("Untitled Instance", "Yue89", "FastAPI", "GitHub")
 
         self.layout_mannager = QVBoxLayout(self)
         self.layout_mannager.addWidget(card1)

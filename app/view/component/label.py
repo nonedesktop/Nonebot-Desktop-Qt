@@ -22,7 +22,7 @@ class BodyLabel(FluentLabelBase):
 
 class BodyStrongLabel(FluentLabelBase):
     def getFont(self) -> QFont:
-        return getFont(fontSize=14, fontWeight=QFont.Weight.Bold)
+        return getFont(fontSize=14, fontWeight=QFont.Weight.DemiBold)
 
 
 class BodyLargeLabel(FluentLabelBase):
