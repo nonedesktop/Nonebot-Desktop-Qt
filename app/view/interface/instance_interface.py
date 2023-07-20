@@ -3,7 +3,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QFrame, QLabel
 
 from core.style import StyleSheet
-from view.component import InterfaceTitleBar
+from view.component import InterfaceTitleBar, InstanceCard
 
 
 class InstanceCardView(QFrame):
@@ -30,6 +30,22 @@ class InstanceCardView(QFrame):
         self.header_bar_layout_mannager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.header_bar_layout_mannager.addWidget(self.title_label, alignment=Qt.AlignmentFlag.AlignLeft)
         self.header_bar_layout_mannager.addWidget(self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight)
+
+    def add_instance_card(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str) -> None:
+        """将实例卡片添加到实例布局中
+        参数:
+            instance_name: 实例的名称
+            instance_id: 实例的唯一标识ID
+            driver_name: 实例所使用的驱动名称
+            adapter_name: 实例所使用的适配器名称
+        用法:
+            实例的唯一ID应当是自动生成的,后续用作导航等,
+            最佳实践应当是在非GUI线程内进行调用,否则可能会造成GUI线程绘制阻塞,
+            因此需要将此函数注册到控制器中,再交由线程管理器移交到工作线程处理.
+        """
+        # TODO Use Emun with driver and adapter
+        card = InstanceCard(instance_name, instance_id, driver_name, adapter_name, self)
+        self.layout_manager.addWidget(card)
 
 
 class InstanceInterface(ScrollArea):
