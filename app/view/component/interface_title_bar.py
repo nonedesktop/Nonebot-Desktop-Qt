@@ -1,7 +1,7 @@
 from PySide6.QtGui import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout
 
-from .label import TitleLabel, BodyStrongLabel
+from .label import TitleLabel, BodyLabel
 
 
 class InterfaceTitleBar(QWidget):
@@ -9,7 +9,7 @@ class InterfaceTitleBar(QWidget):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.title_label = TitleLabel(title, self)
-        self.subtitle_label = BodyStrongLabel(subtitle, self)
+        self.subtitle_label = BodyLabel(subtitle, self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout
