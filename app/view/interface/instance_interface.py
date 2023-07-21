@@ -18,11 +18,12 @@ class InstanceCardView(QFrame):
         # Initialize self widget & layout
         self.__init_sub_widget_layout()
         self.__init_layout()
+        # 
 
     def __init_layout(self):
         # Set layout options
         # Place layout widgets
-        self.setFixedHeight(100)
+        # self.setFixedHeight(100)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.layout_manager.addLayout(self.header_bar_layout_mannager)
 
@@ -61,6 +62,8 @@ class InstanceInterface(ScrollArea):
         self.__init_sub_widget()
         self.__init_widget()
         self.__init_layout()
+        # Temporary
+        self.load_instance_card()
 
     def __init_widget(self):
         # Set widgets object name
@@ -81,3 +84,13 @@ class InstanceInterface(ScrollArea):
         self.view_container_layout_manager.addWidget(self.title_bar)
         self.view_container_layout_manager.addSpacing(4)
         self.view_container_layout_manager.addWidget(self.instance_card_view)
+
+    def load_instance_card(self):
+        """Attention!!!
+        Here this is a temporary method for design and layout purposes,
+        we should never do this kind of thing inside the UI thread,
+        it can have serious consequences.
+        """
+        self.instance_card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
+        self.instance_card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
+        self.instance_card_view.layout_manager.addStretch(1)
