@@ -85,7 +85,7 @@ class MarketInterface(ScrollArea):
         self.view_container = QWidget()
         self.title_bar = InterfaceTitleBar(
             "扩展商店",
-            "Enjoy all the extensions from the community, with our rich ecosystem of plugins",
+            "Enjoy all the extensions from the community, with our rich ecosystem of plugins",  # noqa: E501
             self,
         )
         self.extension_card_view = ExtensionCardView(self)

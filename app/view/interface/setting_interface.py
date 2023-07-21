@@ -47,7 +47,7 @@ class SettingInterface(ScrollArea):
         )
         self.about_setting_group = SettingCardGroup("关于", self)
         self.feedback_card = PrimaryPushSettingCard(
-            "反馈", FI.FEEDBACK, "反馈", "发现了BUG？想添加新功能？请告诉我们！", self.about_setting_group
+            "反馈", FI.FEEDBACK, "反馈", "发现了BUG？想添加新功能？请告诉我们！", self.about_setting_group  # noqa: E501
         )
         self.about_card = PrimaryPushSettingCard(
             "关于", FI.INFO, "关于", "关于本程序", self.about_setting_group

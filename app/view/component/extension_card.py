@@ -17,7 +17,7 @@ class ExtensionCard(CardWidget):
         desc: str,
         author: str,
         homepage: str,
-        tags: list[dict[{"label": str, "color": str}]],
+        tags: list[dict[{"label": str, "color": str}]],  # noqa: F821
         is_official: bool,
         type: str,
         supported_adapters: list[str] | None,

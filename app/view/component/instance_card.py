@@ -63,7 +63,7 @@ class InstanceCard(CardWidget):
 
     def __init_sub_widget_layout(self) -> None:
         # Set Layout Options
-        # self.info_bar_layout_manager.setSizeConstraint(QHBoxLayout.SizeConstraint.SetMinimumSize)
+        # self.info_bar_layout_manager.setSizeConstraint(QHBoxLayout.SizeConstraint.SetMinimumSize)  # noqa: E501
         # Place header bar layout widgets
         self.header_bar_layout_manager.addWidget(
             self.instance_name_label, alignment=Qt.AlignmentFlag.AlignLeft
