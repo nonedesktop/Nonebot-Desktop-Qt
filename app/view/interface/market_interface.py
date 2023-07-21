@@ -20,13 +20,17 @@ class ExtensionCardView(QWidget):
         self.search_line_edit = SearchLineEdit(self)
         self.plugin_label_button = PillPushButton("插件", self, FluentIcon.TAG)
         self.adapter_label_button = PillPushButton("适配器", self, FluentIcon.TAG)
-        self.certified_extensions_label_button = PillPushButton("官方认证", self, FluentIcon.TAG)
+        self.certified_extensions_label_button = PillPushButton(
+            "官方认证", self, FluentIcon.TAG
+        )
         self.card_view_container = SmoothScrollArea(self)
         self.card_view_content = QWidget(self.card_view_container)
         self.command_bar_container = QFrame(self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
-        self.card_view_content_layout_manager = FlowLayout(self.card_view_content, True, True)
+        self.card_view_content_layout_manager = FlowLayout(
+            self.card_view_content, True, True
+        )
         self.command_bar_container_layout_manager = QHBoxLayout(self.command_bar_container)
         # Instantiating data and data structures
         self.extension_cards: list[ExtensionCard] = []
@@ -42,7 +46,9 @@ class ExtensionCardView(QWidget):
         # init card_view_container widget
         self.card_view_container.setWidget(self.card_view_content)
         self.card_view_container.setWidgetResizable(True)
-        self.card_view_container.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.card_view_container.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+        )
 
     def __init_layout(self):
         self.layout_manager.setContentsMargins(0, 0, 0, 0)
@@ -61,7 +67,9 @@ class ExtensionCardView(QWidget):
         self.command_bar_container_layout_manager.addWidget(self.search_line_edit)
         self.command_bar_container_layout_manager.addWidget(self.plugin_label_button)
         self.command_bar_container_layout_manager.addWidget(self.adapter_label_button)
-        self.command_bar_container_layout_manager.addWidget(self.certified_extensions_label_button)
+        self.command_bar_container_layout_manager.addWidget(
+            self.certified_extensions_label_button
+        )
         # init card_view_container widget layout
         self.card_view_container.setViewportMargins(2, 5, 2, 5)
         # init card_view_content widget layout

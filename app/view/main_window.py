@@ -23,7 +23,9 @@ class MainWindow(FluentWindow):
         self.home_interface = InterfaceTemplates("HomeInterface", "看板子界面", self)
         self.instance_interface = InstanceInterface(self)
         self.market_interface = MarketInterface(self)
-        self.global_instance_interface = InterfaceTemplates("GlobalInstanceSelection", "选择全局实例子界面", self)
+        self.global_instance_interface = InterfaceTemplates(
+            "GlobalInstanceSelection", "选择全局实例子界面", self
+        )
         self.console_interface = ConsoleInterface(self)
         self.setting_interface = SettingInterface(self)
 
@@ -48,7 +50,9 @@ class MainWindow(FluentWindow):
             "Global Instance Selection",
             NavigationItemPosition.BOTTOM,
         )
-        self.addSubInterface(self.console_interface, FI.PRINT, "Console", NavigationItemPosition.BOTTOM)
+        self.addSubInterface(
+            self.console_interface, FI.PRINT, "Console", NavigationItemPosition.BOTTOM
+        )
         self.addSubInterface(
             self.setting_interface,
             FI.SETTING,

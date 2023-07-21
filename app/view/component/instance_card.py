@@ -5,8 +5,16 @@ from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout
 
 from .label import CaptionLabel, BodyStrongLabel
 
+
 class InstanceCard(CardWidget):
-    def __init__(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str, parent=None) -> None:
+    def __init__(
+        self,
+        instance_name: str,
+        instance_id: str,
+        driver_name: str,
+        adapter_name: str,
+        parent=None,
+    ) -> None:
         super().__init__(parent=parent)
         # Instantiating Data Structures
         # Instantiating Widget Objects
@@ -57,10 +65,16 @@ class InstanceCard(CardWidget):
         # Set Layout Options
         # self.info_bar_layout_manager.setSizeConstraint(QHBoxLayout.SizeConstraint.SetMinimumSize)
         # Place header bar layout widgets
-        self.header_bar_layout_manager.addWidget(self.instance_name_label, alignment=Qt.AlignmentFlag.AlignLeft)
+        self.header_bar_layout_manager.addWidget(
+            self.instance_name_label, alignment=Qt.AlignmentFlag.AlignLeft
+        )
         self.header_bar_layout_manager.addStretch(1)
-        self.header_bar_layout_manager.addWidget(self.instance_status_icon, alignment=Qt.AlignmentFlag.AlignRight)
-        self.header_bar_layout_manager.addWidget(self.instance_status_label, alignment=Qt.AlignmentFlag.AlignRight)
+        self.header_bar_layout_manager.addWidget(
+            self.instance_status_icon, alignment=Qt.AlignmentFlag.AlignRight
+        )
+        self.header_bar_layout_manager.addWidget(
+            self.instance_status_label, alignment=Qt.AlignmentFlag.AlignRight
+        )
         # Place info bar layout widgets
         self.info_bar_layout_manager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.info_bar_layout_manager.addWidget(self.instance_id_icon)

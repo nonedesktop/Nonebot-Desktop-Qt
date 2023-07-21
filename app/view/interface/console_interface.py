@@ -15,10 +15,7 @@ class ConsoleLogView(TextEdit):
 
     def __init_widget(self):
         self.setReadOnly(True)
-        self.setText(
-            "Violet - NoneBot2 Desktop Application\n"
-            "2023 NoneDesktop\n"
-        )
+        self.setText("Violet - NoneBot2 Desktop Application\n" "2023 NoneDesktop\n")
         self.setFont(
             [
                 "Iosevka Term",
@@ -41,7 +38,9 @@ class ConsoleInterface(QFrame):
     def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_bar = InterfaceTitleBar("日志", "Check the log output of all instances", self)
+        self.title_bar = InterfaceTitleBar(
+            "日志", "Check the log output of all instances", self
+        )
         self.console_log_view = ConsoleLogView(self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)

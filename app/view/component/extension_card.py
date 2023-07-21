@@ -100,14 +100,19 @@ class ExtensionCard(CardWidget):
             self.check_mark_icon.setIcon(MFI.CHECKPASS)
             self.check_mark_icon.setToolTip("测试通过")
         # Set urlopen
-        self.github_icon.mouseReleaseEvent = lambda event: (None, QDesktopServices.openUrl(self.homepage))[0]
+        self.github_icon.mouseReleaseEvent = lambda event: (
+            None,
+            QDesktopServices.openUrl(self.homepage),
+        )[0]
         self.github_icon.setToolTip("前往项目主页")
         self.github_icon.setCursor(Qt.CursorShape.PointingHandCursor)
 
     def __init_layout(self):
         # Set layout options
         self.setFixedSize(360, 168)
-        self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout_manager.setAlignment(
+            Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop
+        )
         self.layout_manager.setContentsMargins(16, 12, 12, 12)
         # Place layout widgets
         self.layout_manager.addLayout(self.header_bar_layout_manager)
@@ -120,7 +125,9 @@ class ExtensionCard(CardWidget):
     def __init_sub_widget_layout(self):
         self.offical_mark_icon.setFixedSize(22, 22)
         self.check_mark_icon.setFixedSize(22, 22)
-        self.content_label.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.content_label.setSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
+        )
         self.pypi_icon.setFixedSize(14, 14)
         self.author_icon.setFixedSize(14, 14)
         self.mannage_button.setFixedSize(64, 28)

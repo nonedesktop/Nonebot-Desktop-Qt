@@ -18,7 +18,7 @@ class InstanceCardView(QFrame):
         # Initialize self widget & layout
         self.__init_sub_widget_layout()
         self.__init_layout()
-        # 
+        #
 
     def __init_layout(self):
         # Set layout options
@@ -29,10 +29,16 @@ class InstanceCardView(QFrame):
 
     def __init_sub_widget_layout(self):
         self.header_bar_layout_mannager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
-        self.header_bar_layout_mannager.addWidget(self.title_label, alignment=Qt.AlignmentFlag.AlignLeft)
-        self.header_bar_layout_mannager.addWidget(self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight)
+        self.header_bar_layout_mannager.addWidget(
+            self.title_label, alignment=Qt.AlignmentFlag.AlignLeft
+        )
+        self.header_bar_layout_mannager.addWidget(
+            self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight
+        )
 
-    def add_instance_card(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str) -> None:
+    def add_instance_card(
+        self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str
+    ) -> None:
         """将实例卡片添加到实例布局中
         参数:
             instance_name: 实例的名称
@@ -54,7 +60,9 @@ class InstanceInterface(ScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        self.title_bar = InterfaceTitleBar("实例管理", "Manage all you instances right on one place", self)
+        self.title_bar = InterfaceTitleBar(
+            "实例管理", "Manage all you instances right on one place", self
+        )
         self.instance_card_view = InstanceCardView(self)
         # Instantiating layouts
         self.view_container_layout_manager = QVBoxLayout(self)
@@ -91,6 +99,8 @@ class InstanceInterface(ScrollArea):
         we should never do this kind of thing inside the UI thread,
         it can have serious consequences.
         """
-        self.instance_card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
+        self.instance_card_view.add_instance_card(
+            "Untitled Instance", "0XA", "FastAPI", "OneBot V11"
+        )
         self.instance_card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
         self.instance_card_view.layout_manager.addStretch(1)
