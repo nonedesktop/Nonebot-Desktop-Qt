@@ -6,6 +6,7 @@ from qfluentwidgets import (
     OptionsSettingCard,
     ComboBoxSettingCard,
     SwitchSettingCard,
+    setTheme,
 )
 from qfluentwidgets import FluentIcon as FI
 from PySide6.QtCore import Qt
@@ -76,3 +77,7 @@ class SettingInterface(ScrollArea):
     def __init_signal_connection(self):
         self.feedback_card.clicked.connect(lambda: QMessageBox.information(self, "QDesktopService", "这里打开浏览器ISSUE"))
         self.about_qt_card.clicked.connect(lambda: QMessageBox.aboutQt(self, "关于 Qt"))
+
+        # call setTheme to flush stylesheet
+        self.theme_setting_card.optionChanged.connect(
+            lambda config: setTheme(config.value))
