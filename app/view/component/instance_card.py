@@ -43,14 +43,12 @@ class InstanceCard(CardWidget):
         self.setObjectName("InstanceCard")
         # Set Widget Option & Policy
         self.setFixedHeight(80)
-        # Set Geometry
-
-        pass
+        # Set Geometry & Widget
 
     def __init_sub_widget(self) -> None:
         # Set Object Name
         # Set Widget Option & Policy
-        # Set Geometry
+        # Set Geometry & Widget
         self.instance_status_icon.setFixedSize(6, 6)
 
     def __init_layout(self) -> None:

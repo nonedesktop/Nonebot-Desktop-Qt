@@ -1,38 +1,55 @@
 from qfluentwidgets import ScrollArea, PrimaryPushButton
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QFrame, QLabel
+from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QSizePolicy, QWidget, QFrame
 
 from core.style import StyleSheet
-from view.component import InterfaceTitleBar, InstanceCard
+from view.component import InterfaceTitleBar, InstanceCard, BodyStrongLabel
 
 
 class InstanceCardView(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = QLabel("实例总览", self)
+        self.title_label = BodyStrongLabel("实例总览", self)
         self.new_instance_button = PrimaryPushButton("新的实例", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
-        self.header_bar_layout_mannager = QHBoxLayout()
+        self.header_bar_layout_manager = QHBoxLayout()
+        self.instance_card_container_layout_manager = QVBoxLayout()
         # Initialize self widget & layout
+        self.__init_widget()
         self.__init_sub_widget_layout()
         self.__init_layout()
-        #
+
+    def __init_widget(self) -> None:
+        # Set Object Name
+        self.setObjectName("InstanceCardView")
+        # Set Widget Option & Policy
+        self.setSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.MinimumExpanding
+        )
+        # Set Geometry & Widget
+        # Apply stylesheet
+        # TODO This is just for design should move this to qss file later
+        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}")  # noqa: E501
 
     def __init_layout(self):
+        # Set Widget Option & Policy
         # Set layout options
-        # Place layout widgets
-        # self.setFixedHeight(100)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.layout_manager.addLayout(self.header_bar_layout_mannager)
+        # Place layout widgets
+        self.layout_manager.addLayout(self.header_bar_layout_manager)
+        self.layout_manager.addSpacing(10)
+        self.layout_manager.addLayout(self.instance_card_container_layout_manager)
 
     def __init_sub_widget_layout(self):
-        self.header_bar_layout_mannager.setAlignment(Qt.AlignmentFlag.AlignVCenter)
-        self.header_bar_layout_mannager.addWidget(
+        # Set layout options
+        self.instance_card_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        # Place layout widgets
+        self.header_bar_layout_manager.addWidget(
             self.title_label, alignment=Qt.AlignmentFlag.AlignLeft
         )
-        self.header_bar_layout_mannager.addWidget(
+        self.header_bar_layout_manager.addWidget(
             self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight
         )
 
@@ -52,7 +69,7 @@ class InstanceCardView(QFrame):
         """
         # TODO Use Emun with driver and adapter
         card = InstanceCard(instance_name, instance_id, driver_name, adapter_name, self)
-        self.layout_manager.addWidget(card)
+        self.instance_card_container_layout_manager.addWidget(card)
 
 
 class InstanceInterface(ScrollArea):
@@ -79,6 +96,8 @@ class InstanceInterface(ScrollArea):
         # Set widgets options
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        # Set Geometry & Widget
+        self.setWidget(self.view_container)
         # Apply stylesheet
         StyleSheet.INSTANCE_INTERFACE.apply(self)
 
@@ -86,12 +105,14 @@ class InstanceInterface(ScrollArea):
         self.view_container.setObjectName("InstanceInterfaceViewContainer")
 
     def __init_layout(self):
-        self.setWidget(self.view_container)
+        # Set Layout Options
         self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        # Place layout widgets
         self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_manager.addWidget(self.title_bar)
         self.view_container_layout_manager.addSpacing(4)
         self.view_container_layout_manager.addWidget(self.instance_card_view)
+        self.view_container_layout_manager.addStretch(1)
 
     def load_instance_card(self):
         """Attention!!!
@@ -103,4 +124,3 @@ class InstanceInterface(ScrollArea):
             "Untitled Instance", "0XA", "FastAPI", "OneBot V11"
         )
         self.instance_card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
-        self.instance_card_view.layout_manager.addStretch(1)
