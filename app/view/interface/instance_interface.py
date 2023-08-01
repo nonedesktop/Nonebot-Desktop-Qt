@@ -1,8 +1,9 @@
-from qfluentwidgets import ScrollArea, PrimaryPushButton
-from PySide6.QtCore import Qt
+from qfluentwidgets import ScrollArea, PrimaryPushButton, RoundMenu, Action
+from PySide6.QtCore import Qt, QPoint
 from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QSizePolicy, QWidget, QFrame
 
-from core.style import StyleSheet
+from core import StyleSheet
+from core import MyFluentIcon as MFI
 from view.component import InterfaceTitleBar, InstanceCard, BodyStrongLabel
 
 
@@ -31,7 +32,9 @@ class InstanceCardView(QFrame):
         # Set Geometry & Widget
         # Apply stylesheet
         # TODO This is just for design should move this to qss file later
-        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}")  # noqa: E501
+        self.setStyleSheet(
+            "#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}"
+        )  # noqa: E501
 
     def __init_layout(self):
         # Set Widget Option & Policy
@@ -87,6 +90,8 @@ class InstanceInterface(ScrollArea):
         self.__init_sub_widget()
         self.__init_widget()
         self.__init_layout()
+        # Initialize signal connection
+        self.__init_signal_connection()
         # Temporary
         self.load_instance_card()
 
@@ -113,6 +118,25 @@ class InstanceInterface(ScrollArea):
         self.view_container_layout_manager.addSpacing(4)
         self.view_container_layout_manager.addWidget(self.instance_card_view)
         self.view_container_layout_manager.addStretch(1)
+
+    def __init_signal_connection(self):
+        self.instance_card_view.new_instance_button.clicked.connect(
+            self.__show_new_instance_menu
+        )
+
+    def __show_new_instance_menu(self):
+        menu = RoundMenu(parent=self)
+        menu.addAction(Action(MFI.BOT, "新建本地实例", self))
+        menu.addAction(Action(MFI.BOT, "托管本地实例", self))
+        menu.addAction(Action(MFI.BOT, "新建远程实例", self))
+        menu.addAction(Action(MFI.BOT, "托管远程实例", self))
+        x: int = (
+            self.instance_card_view.new_instance_button.width() - menu.sizeHint().width()
+        ) // 2 + 10
+        pos: QPoint = self.instance_card_view.new_instance_button.mapToGlobal(
+            QPoint(x, self.instance_card_view.new_instance_button.height())
+        )
+        menu.exec(pos)
 
     def load_instance_card(self):
         """Attention!!!
