@@ -1,7 +1,7 @@
+from qfluentwidgets import TextEdit
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QFrame, QVBoxLayout
-from PySide6.QtCore import Qt
-from qfluentwidgets import TextEdit
 
 from view.component import InterfaceTitleBar
 
@@ -32,6 +32,9 @@ class ConsoleLogView(TextEdit):
         # assume after loading
         self.append("就绪")
         # 'append' operation will add a new line automatically
+
+    def contextMenuEvent(self, e):
+        pass
 
 
 class ConsoleInterface(QFrame):
