@@ -1,17 +1,95 @@
 from qfluentwidgets import ScrollArea, PrimaryPushButton, RoundMenu, Action
 from PySide6.QtCore import Qt, QPoint
-from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout, QSizePolicy, QWidget, QFrame
+from PySide6.QtWidgets import (
+    QWidget,
+    QFrame,
+    QHBoxLayout,
+    QVBoxLayout,
+    QFormLayout,
+    QSizePolicy,
+)
 
 from core import StyleSheet
 from core import MyFluentIcon as MFI
-from view.component import InterfaceTitleBar, InstanceCard, BodyStrongLabel
+from view.component import (
+    InterfaceTitleBar,
+    InstanceCard,
+    BodyLabel,
+    BodyStrongLabel,
+    BodyStrongLargeLabel,
+)
+
+
+class InstanceDetailView(QFrame):
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent=parent)
+        # Instantiating widgets
+        self.title_label = BodyStrongLargeLabel("实例详情", self)
+        # Instantiating layouts
+        self.layout_manager = QVBoxLayout(self)
+        self.form_layout_manager = QFormLayout()
+        # Initialize self widget & layout
+        self.__init_widget()
+        self.__init_sub_layout()
+        self.__init_layout()
+
+    def __init_widget(self) -> None:
+        # Set Object Name
+        self.setObjectName("InstanceDetailView")
+        # Set Option & Policy
+        self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+        # Set Geometry & Widget
+        # Apply stylesheet
+        # TODO This is just for design should move this to qss file later
+        self.setStyleSheet(
+            "#InstanceDetailView {background-color: rgb(242, 242, 242);border-radius: 6px}"
+        )  # noqa: E501
+
+    def __init_layout(self):
+        # Set Option & Policy
+        self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        # Place layout widgets
+        self.layout_manager.addWidget(self.title_label)
+        self.layout_manager.addSpacing(10)
+        self.layout_manager.addLayout(self.form_layout_manager)
+
+    def __init_sub_layout(self):
+        # Set Option & Policy
+        self.form_layout_manager.setRowWrapPolicy(QFormLayout.RowWrapPolicy.DontWrapRows)
+        self.form_layout_manager.setFieldGrowthPolicy(
+            QFormLayout.FieldGrowthPolicy.FieldsStayAtSizeHint
+        )
+        self.form_layout_manager.setHorizontalSpacing(50)
+        # Place layout widgets
+        # TODO Just for Design should consider all later
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("INSTANCE ID", self), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("INSTANCE NAME", self), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("INSTANCE PATH"), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("PLUGIN LIST", self), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("ADAPTER", self), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("DRIVER", self), BodyLabel("Unknow", self)
+        )
+        self.form_layout_manager.addRow(
+            BodyStrongLabel("PATH", self), BodyLabel("Unknow", self)
+        )
 
 
 class InstanceCardView(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = BodyStrongLabel("实例总览", self)
+        self.title_label = BodyStrongLargeLabel("实例总览", self)
         self.new_instance_button = PrimaryPushButton("新的实例", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
@@ -84,6 +162,7 @@ class InstanceInterface(ScrollArea):
             "实例管理", "Manage all you instances right on one place", self
         )
         self.instance_card_view = InstanceCardView(self)
+        self.instance_detail_view = InstanceDetailView(self)
         # Instantiating layouts
         self.view_container_layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout
@@ -111,12 +190,14 @@ class InstanceInterface(ScrollArea):
 
     def __init_layout(self):
         # Set Layout Options
+        self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
-        self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_manager.addWidget(self.title_bar)
         self.view_container_layout_manager.addSpacing(4)
         self.view_container_layout_manager.addWidget(self.instance_card_view)
+        self.view_container_layout_manager.addSpacing(2)
+        self.view_container_layout_manager.addWidget(self.instance_detail_view)
         self.view_container_layout_manager.addStretch(1)
 
     def __init_signal_connection(self):
