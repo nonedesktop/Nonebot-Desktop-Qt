@@ -30,6 +30,11 @@ class BodyLargeLabel(FluentLabelBase):
         return getFont(fontSize=18, fontWeight=QFont.Weight.Normal)
 
 
+class BodyStrongLargeLabel(FluentLabelBase):
+    def getFont(self) -> QFont:
+        return getFont(fontSize=18, fontWeight=QFont.Weight.Bold)
+
+
 class SubtitleLabel(FluentLabelBase):
     def getFont(self) -> QFont:
         return getFont(fontSize=20, fontWeight=QFont.Weight.Bold)
