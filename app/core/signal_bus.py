@@ -1,7 +1,8 @@
-from PySide6.QtCore import QObject
-
-from .singleton import SingletonMeta
+from PySide6.QtCore import QObject, Signal
 
 
-class SingleBus(QObject, metaclass=SingletonMeta):
-    pass
+class _SignalBus(QObject):
+    FOO = Signal()
+
+
+signal_bus = _SignalBus()
