@@ -1,15 +1,15 @@
 from datetime import datetime
-from pydantic import BaseModel
+from msgspec import Struct
 
 
-class ColoredTag(BaseModel):
+class ColoredTag(Struct):
     """Tag with color"""
 
     label: str
     color: str
 
 
-class CommonInfo(BaseModel):
+class CommonInfo(Struct):
     """Common info for drivers, adapters and plugins"""
 
     module_name: str
