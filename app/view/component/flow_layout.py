@@ -1,4 +1,3 @@
-# coding:utf-8
 from typing import List, TYPE_CHECKING
 
 from PySide6.QtCore import (
@@ -14,7 +13,7 @@ from PySide6.QtWidgets import QLayout
 
 
 if TYPE_CHECKING:
-    from PySide6.QtWidgets import QWidgetItem
+    from PySide6.QtWidgets import QWidget, QLayoutItem
 
 
 class FlowLayout(QLayout):
@@ -37,7 +36,7 @@ class FlowLayout(QLayout):
             the duration of animation in milliseconds
         """
         super().__init__(parent)
-        self._items: List[QWidgetItem] = []
+        self._items: List["QLayoutItem"] = []
         self._anis: List[QPropertyAnimation] = []
         self._aniGroup = QParallelAnimationGroup(self)
         self._verticalSpacing = 10
@@ -46,10 +45,10 @@ class FlowLayout(QLayout):
         self.isTight = isTight
         self.DurationMsec = durationMsec
 
-    def addItem(self, item):
+    def addItem(self, item: "QLayoutItem") -> None:
         self._items.append(item)
 
-    def addWidget(self, w):
+    def addWidget(self, w: "QWidget") -> None:
         super().addWidget(w)
         if not self.needAni:
             return
@@ -91,7 +90,7 @@ class FlowLayout(QLayout):
 
     def takeAt(self, index: int):
         if 0 <= index < len(self._items):
-            item: QWidgetItem = self._items[index]
+            item: "QLayoutItem" = self._items[index]
             ani = item.widget().property("flowAni")
             if ani:
                 self._anis.remove(ani)
