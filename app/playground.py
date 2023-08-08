@@ -1,7 +1,6 @@
-from qfluentwidgets import FlowLayout
 from PySide6.QtWidgets import QWidget, QApplication
 
-from view.component import ExtensionCard, InstanceCard
+from view.component import FlowLayout, ExtensionCard, InstanceCard
 
 
 class MainWindow(QWidget):
@@ -57,7 +56,7 @@ class MainWindow(QWidget):
 
         card4 = InstanceCard("Untitled Instance", "Yue89", "FastAPI", "GitHub")
 
-        self.layout_mannager = FlowLayout(self, needAni=True, isTight=True, DurationMsec=100)
+        self.layout_mannager = FlowLayout(self, needAni=True, isTight=True)
         self.layout_mannager.addWidget(card1)
         self.layout_mannager.addWidget(card2)
         self.layout_mannager.addWidget(card3)
