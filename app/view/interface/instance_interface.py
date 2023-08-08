@@ -9,8 +9,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 
-from core import StyleSheet
-from core import MyFluentIcon as MFI
+from core import StyleSheet, MyFluentIcon as MFI
 from view.component import (
     InterfaceTitleBar,
     InstanceCard,
@@ -56,33 +55,17 @@ class InstanceDetailView(QFrame):
     def __init_sub_layout(self):
         # Set Option & Policy
         self.form_layout_manager.setRowWrapPolicy(QFormLayout.RowWrapPolicy.DontWrapRows)
-        self.form_layout_manager.setFieldGrowthPolicy(
-            QFormLayout.FieldGrowthPolicy.FieldsStayAtSizeHint
-        )
+        self.form_layout_manager.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.FieldsStayAtSizeHint)
         self.form_layout_manager.setHorizontalSpacing(50)
         # Place layout widgets
         # TODO Just for Design should consider all later
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("INSTANCE ID", self), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("INSTANCE NAME", self), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("INSTANCE PATH"), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("PLUGIN LIST", self), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("ADAPTER", self), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("DRIVER", self), BodyLabel("Unknow", self)
-        )
-        self.form_layout_manager.addRow(
-            BodyStrongLabel("PATH", self), BodyLabel("Unknow", self)
-        )
+        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE ID", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE NAME", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE PATH"), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("PLUGIN LIST", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("ADAPTER", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("DRIVER", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(BodyStrongLabel("PATH", self), BodyLabel("Unknow", self))
 
 
 class InstanceCardView(QFrame):
@@ -104,15 +87,11 @@ class InstanceCardView(QFrame):
         # Set Object Name
         self.setObjectName("InstanceCardView")
         # Set Widget Option & Policy
-        self.setSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.MinimumExpanding
-        )
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.MinimumExpanding)
         # Set Geometry & Widget
         # Apply stylesheet
         # TODO This is just for design should move this to qss file later
-        self.setStyleSheet(
-            "#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}"
-        )  # noqa: E501
+        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}")  # noqa: E501
 
     def __init_layout(self):
         # Set Widget Option & Policy
@@ -127,16 +106,10 @@ class InstanceCardView(QFrame):
         # Set layout options
         self.instance_card_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
-        self.header_bar_layout_manager.addWidget(
-            self.title_label, alignment=Qt.AlignmentFlag.AlignLeft
-        )
-        self.header_bar_layout_manager.addWidget(
-            self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight
-        )
+        self.header_bar_layout_manager.addWidget(self.title_label, alignment=Qt.AlignmentFlag.AlignLeft)
+        self.header_bar_layout_manager.addWidget(self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight)
 
-    def add_instance_card(
-        self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str
-    ) -> None:
+    def add_instance_card(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str) -> None:
         """将实例卡片添加到实例布局中
         参数:
             instance_name: 实例的名称
@@ -158,9 +131,7 @@ class InstanceInterface(ScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        self.title_bar = InterfaceTitleBar(
-            "实例管理", "Manage all you instances right on one place", self
-        )
+        self.title_bar = InterfaceTitleBar("实例管理", "Manage all you instances right on one place", self)
         self.instance_card_view = InstanceCardView(self)
         self.instance_detail_view = InstanceDetailView(self)
         # Instantiating layouts
@@ -201,9 +172,7 @@ class InstanceInterface(ScrollArea):
         self.view_container_layout_manager.addStretch(1)
 
     def __init_signal_connection(self):
-        self.instance_card_view.new_instance_button.clicked.connect(
-            self.__show_new_instance_menu
-        )
+        self.instance_card_view.new_instance_button.clicked.connect(self.__show_new_instance_menu)
 
     def __show_new_instance_menu(self):
         menu = RoundMenu(parent=self)
@@ -211,9 +180,7 @@ class InstanceInterface(ScrollArea):
         menu.addAction(Action(MFI.BOT, "托管本地实例", self))
         menu.addAction(Action(MFI.BOT, "新建远程实例", self))
         menu.addAction(Action(MFI.BOT, "托管远程实例", self))
-        x: int = (
-            self.instance_card_view.new_instance_button.width() - menu.sizeHint().width()
-        ) // 2 + 10
+        x: int = (self.instance_card_view.new_instance_button.width() - menu.sizeHint().width()) // 2 + 10
         pos: QPoint = self.instance_card_view.new_instance_button.mapToGlobal(
             QPoint(x, self.instance_card_view.new_instance_button.height())
         )
@@ -225,7 +192,6 @@ class InstanceInterface(ScrollArea):
         we should never do this kind of thing inside the UI thread,
         it can have serious consequences.
         """
-        self.instance_card_view.add_instance_card(
-            "Untitled Instance", "0XA", "FastAPI", "OneBot V11"
-        )
+        self.instance_card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
         self.instance_card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
+        self.instance_card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")

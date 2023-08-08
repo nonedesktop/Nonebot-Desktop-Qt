@@ -29,8 +29,3 @@ class Interface(Protocol):
         # Set Layout Options
         # Place layout widgets
         ...
-
-    def __init_sub_widget(self) -> None:
-        # Set Layout Options
-        # Place layout widgets
-        ...
