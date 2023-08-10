@@ -1,5 +1,6 @@
-from qfluentwidgets import FluentWindow, NavigationItemPosition, FluentIcon as FI
+from qfluentwidgets import NavigationItemPosition, FluentIcon as FI
 
+from view.component import Window
 from view.interface import (
     InterfaceTemplates,
     DashBoardInterface,
@@ -11,7 +12,7 @@ from view.interface import (
 from core import MyFluentIcon as MFI
 
 
-class MainWindow(FluentWindow):
+class MainWindow(Window):
     def __init__(self):
         super().__init__()
         self.setObjectName("MainWindow")
@@ -32,7 +33,7 @@ class MainWindow(FluentWindow):
         self.addSubInterface(self.dashboard_interface, FI.HOME, "DashBoard")
         self.addSubInterface(self.market_interface, FI.APPLICATION, "Extension Market")
         # set menu separator
-        self.navigationInterface.addSeparator()
+        self.navigation_interface.addSeparator()
         # set scroll menu
         self.addSubInterface(
             self.instance_interface,

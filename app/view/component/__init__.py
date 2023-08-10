@@ -1,3 +1,4 @@
+from .window import Window
 from .interface_title_bar import InterfaceTitleBar
 from .extension_card import ExtensionCard
 from .instance_card import InstanceCard
@@ -17,6 +18,7 @@ from .label import (
 
 
 __all__: list[str] = [
+    "Window",
     "InterfaceTitleBar",
     "ExtensionCard",
     "InstanceCard",
