@@ -2,6 +2,7 @@ from .interface_title_bar import InterfaceTitleBar
 from .extension_card import ExtensionCard
 from .instance_card import InstanceCard
 from .flow_layout import FlowLayout
+from .stacked_widget import StackedWidget
 from .label import (
     CaptionLabel,
     BodyLabel,
@@ -20,6 +21,7 @@ __all__: list[str] = [
     "ExtensionCard",
     "InstanceCard",
     "FlowLayout",
+    "StackedWidget",
     "CaptionLabel",
     "BodyLabel",
     "BodyStrongLabel",
