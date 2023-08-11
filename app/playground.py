@@ -1,11 +1,24 @@
+from qfluentwidgets import SmoothScrollArea
+
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QApplication
 
 from view.component import FlowLayout, ExtensionCard, InstanceCard
 
 
-class MainWindow(QWidget):
-    def __init__(self, parent=None):
+class MainWindow(SmoothScrollArea):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
+        self.card_view_content = QWidget()
+        self.setWidgetResizable(True)
+        self.setViewportMargins(0, 5, 0, 5)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setWidget(self.card_view_content)
+        self.layout_manager = FlowLayout(self.card_view_content, needAni=True, isTight=False)
+        self.layout_manager.setVerticalSpacing(10)
+        self.layout_manager.setHorizontalSpacing(10)
+        self.layout_manager.setContentsMargins(8, 3, 8, 8)
+
         card1 = ExtensionCard(
             "nonebot_plugin_status",
             "nonebot-plugin-status",
@@ -56,15 +69,34 @@ class MainWindow(QWidget):
 
         card4 = InstanceCard("Untitled Instance", "Yue89", "FastAPI", "GitHub")
 
-        self.layout_mannager = FlowLayout(self, needAni=True, isTight=True)
-        self.layout_mannager.addWidget(card1)
-        self.layout_mannager.addWidget(card2)
-        self.layout_mannager.addWidget(card3)
-        self.layout_mannager.addWidget(card4)
+        for _ in range(400):
+            card = ExtensionCard(
+                "example_id",
+                "Example Name",
+                "Example Title",
+                "Example Description",
+                "Example Author",
+                "https://github.com/example",
+                [{"label": "example_label", "color": "#f12020"}],
+                True,
+                "application",
+                None,
+                True,
+                "2023-08-11T00:00:00.000000+08:00",
+                self,
+            )
+            self.layout_manager.addWidget(card)
+
+        self.layout_manager.addWidget(card1)
+        self.layout_manager.addWidget(card2)
+        self.layout_manager.addWidget(card3)
+        self.layout_manager.addWidget(card4)
 
 
 if __name__ == "__main__":
-    app = QApplication()
+    # 试验性地启用GPU渲染来优化性能
+    # app = QApplication.setAttribute(Qt.ApplicationAttribute.AA_UseSoftwareOpenGL)
+    app = QApplication([])
     w = MainWindow()
     w.show()
     app.exec()
