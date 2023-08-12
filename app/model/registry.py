@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from msgspec import Struct
 
 
@@ -9,7 +10,7 @@ class ColoredTag(Struct):
     color: str
 
 
-class CommonInfo(Struct):
+class CommonMetadata(Struct):
     """Common info for drivers, adapters and plugins"""
 
     module_name: str
@@ -37,7 +38,7 @@ class CommonInfo(Struct):
     """Whether an extension is official"""
 
 
-class PluginInfo(CommonInfo):
+class PluginMetadata(CommonMetadata):
     """Plugin info model"""
 
     # Some plugins are still not prepared for these metadata, so `None` is still needed
