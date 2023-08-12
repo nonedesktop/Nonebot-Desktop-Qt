@@ -6,19 +6,19 @@ from PySide6.QtGui import QDesktopServices
 from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 
 from core import StyleSheet, MyFluentIcon as MFI
+from model import PluginMetadata
 
 
 if TYPE_CHECKING:
     from PySide6.QtWidgets import QWidget
-    from model import PluginMetadata
 
 
 class ExtensionCard(CardWidget):
-    clicked: Signal = Signal()
+    clicked: Signal = Signal(PluginMetadata)
 
     def __init__(
         self,
-        metadata: "PluginMetadata",
+        metadata: PluginMetadata,
         parent: Optional["QWidget"] = None,
     ) -> None:
         super().__init__(parent=parent)
