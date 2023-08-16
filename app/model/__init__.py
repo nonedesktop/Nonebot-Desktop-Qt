@@ -1,1 +1,1 @@
-from .registry import PluginMetadata as PluginMetadata
+from .registry import PluginMetadata as PluginMetadata, ColoredTag as ColoredTag

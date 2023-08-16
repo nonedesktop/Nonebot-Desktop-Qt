@@ -1,102 +1,78 @@
-from qfluentwidgets import SmoothScrollArea
+import random
+from time import perf_counter
+from datetime import datetime, timedelta
 
+from qfluentwidgets import SmoothScrollArea
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QApplication
 
-from view.component import FlowLayout, ExtensionCard, InstanceCard
+from model import ColoredTag, PluginMetadata
+from view.component import FlowLayout, ExtensionCard
 
 
 class MainWindow(SmoothScrollArea):
-    def __init__(self, parent=None) -> None:
+    def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent=parent)
+        self.init_ui()
+        start_time = perf_counter()
+        self.load_card(500)
+        end_time = perf_counter()
+        print(f"加载500个卡片共耗时{end_time - start_time:.2f}秒")
+
+    def init_ui(self) -> None:
+        start_time = perf_counter()
         self.card_view_content = QWidget()
-        self.setWidgetResizable(True)
-        self.setViewportMargins(0, 5, 0, 5)
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.layout_manager = FlowLayout(self.card_view_content, needAni=True)
         self.setWidget(self.card_view_content)
-        self.layout_manager = FlowLayout(self.card_view_content, needAni=True, isTight=False)
+        self.setWidgetResizable(True)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setViewportMargins(0, 5, 0, 5)
+        self.layout_manager.setContentsMargins(8, 3, 8, 8)
         self.layout_manager.setVerticalSpacing(10)
         self.layout_manager.setHorizontalSpacing(10)
-        self.layout_manager.setContentsMargins(8, 3, 8, 8)
+        end_time = perf_counter()
+        print(f"初始化UI共耗时{end_time - start_time:.2f}秒")
 
-        card1 = ExtensionCard(
-            "nonebot_plugin_status",
-            "nonebot-plugin-status",
-            "服务器状态查看",
-            "通过戳一戳获取服务器状态",
-            "yanyongyu",
-            "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
-            [{"label": "t:server", "color": "#f12020"}],
-            True,
-            "application",
-            None,
-            True,
-            "2023-06-26T21:53:28.908452+08:00",
-            self,
+    def generate_colored_tag(self) -> ColoredTag:
+        colors = ["red", "green", "blue", "yellow", "orange", "purple", "pink"]
+        return ColoredTag(label=f"Tag-{random.randint(1, 100)}", color=random.choice(colors))
+
+    def generate_plugin_metadata(self) -> PluginMetadata:
+        tags = [self.generate_colored_tag() for _ in range(3)]  # Generating 3 tags for each plugin
+        return PluginMetadata(
+            module_name=f"module_{random.randint(1, 100)}",
+            project_link=f"pypi.org/project/module_{random.randint(1, 100)}",
+            name=f"Module {random.randint(1, 100)}",
+            desc=f"Description for Module {random.randint(1, 100)}",
+            author=f"Author-{random.randint(1, 100)}",
+            homepage=f"homepage-{random.randint(1, 100)}.com",
+            tags=tags,
+            is_official=random.choice([True, False]),
+            type=f"Type-{random.choice(['A', 'B', 'C'])}",
+            supported_adapters=[f"adapter-{random.randint(1, 10)}" for _ in range(random.randint(1, 5))],
+            valid=random.choice([True, False]),
+            time=datetime.now() - timedelta(days=random.randint(1, 365)),
         )
 
-        card2 = ExtensionCard(
-            "nonebot_plugin_docs",
-            "nonebot-plugin-docs",
-            "NoneBot离线文档",
-            "在本地浏览NoneBot文档",
-            "nonebot",
-            "https://github.com/nonebot/nonebot2/tree/master/packages/nonebot-plugin-docs",
-            [{"label": "t:server", "color": "#f12020"}],
-            True,
-            "application",
-            None,
-            False,
-            "2023-06-26T21:54:14.646379+08:00",
-            self,
-        )
+    def add_card(self, matadate: PluginMetadata) -> None:
+        self.layout_manager.addWidget(ExtensionCard(matadate, self))
 
-        card3 = ExtensionCard(
-            "nonebot_plugin_fortune",
-            "nonebot-plugin-fortune",
-            "今日运势",
-            "抽签！抽取你的今日运势🙏",
-            "KafCoppelia",
-            "https://github.com/MinatoAquaCrews/nonebot_plugin_fortune",
-            [{"label": "t:server", "color": "#f12020"}],
-            False,
-            "application",
-            None,
-            True,
-            "2023-07-16T00:01:41.186448+08:00",
-            self,
-        )
-
-        card4 = InstanceCard("Untitled Instance", "Yue89", "FastAPI", "GitHub")
-
-        for _ in range(400):
-            card = ExtensionCard(
-                "example_id",
-                "Example Name",
-                "Example Title",
-                "Example Description",
-                "Example Author",
-                "https://github.com/example",
-                [{"label": "example_label", "color": "#f12020"}],
-                True,
-                "application",
-                None,
-                True,
-                "2023-08-11T00:00:00.000000+08:00",
-                self,
-            )
-            self.layout_manager.addWidget(card)
-
-        self.layout_manager.addWidget(card1)
-        self.layout_manager.addWidget(card2)
-        self.layout_manager.addWidget(card3)
-        self.layout_manager.addWidget(card4)
+    def load_card(self, num: int) -> None:
+        for _ in range(num):
+            self.add_card(self.generate_plugin_metadata())
 
 
 if __name__ == "__main__":
+    total_start_time = perf_counter()
     # 试验性地启用GPU渲染来优化性能
     # app = QApplication.setAttribute(Qt.ApplicationAttribute.AA_UseSoftwareOpenGL)
     app = QApplication([])
+    init_qapp_time = perf_counter()
+    print(f"初始化QApplication对象耗时{init_qapp_time - total_start_time:.2f}秒")
     w = MainWindow()
+    init_mainwindows_time = perf_counter()
+    print(f"初始化MainWindow对象耗时{init_mainwindows_time - total_start_time:.2f}秒")
     w.show()
+    total_end_time = perf_counter()
+    print(f"完成渲染绘制到事件循环启动共耗时{total_end_time - total_start_time:.2f}秒")
     app.exec()
