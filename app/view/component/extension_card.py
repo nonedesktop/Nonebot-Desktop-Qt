@@ -2,11 +2,11 @@ from typing import Optional, TYPE_CHECKING
 
 from qfluentwidgets import CardWidget, IconWidget, PrimaryPushButton, FluentIcon as FI
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QDesktopServices
 from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 
 from core import StyleSheet, MyFluentIcon as MFI
 from model import PluginMetadata
+from .url_widget import UrlIconWidget
 
 
 if TYPE_CHECKING:
@@ -14,8 +14,6 @@ if TYPE_CHECKING:
 
 
 class ExtensionCard(CardWidget):
-    clicked: Signal = Signal(PluginMetadata)
-
     def __init__(
         self,
         metadata: PluginMetadata,
@@ -34,7 +32,7 @@ class ExtensionCard(CardWidget):
         self.offical_mark_icon = IconWidget(MFI.NOTOFFICALMARK, self)
         self.check_mark_icon = IconWidget(MFI.CHECKNOTPASS, self)
         self.mannage_button = PrimaryPushButton("安装", self)
-        self.github_icon = IconWidget(FI.GITHUB, self)
+        self.github_icon = UrlIconWidget(FI.GITHUB, metadata.homepage, self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         self.header_bar_layout_manager = QHBoxLayout()
@@ -70,13 +68,7 @@ class ExtensionCard(CardWidget):
         if self.metadata.valid:
             self.check_mark_icon.setIcon(MFI.CHECKPASS)
             self.check_mark_icon.setToolTip("测试通过")
-        # Set urlopen
-        self.github_icon.mouseReleaseEvent = lambda event: (
-            None,
-            QDesktopServices.openUrl(self.metadata.homepage),
-        )[0]
         self.github_icon.setToolTip("前往项目主页")
-        self.github_icon.setCursor(Qt.CursorShape.PointingHandCursor)
 
     def __init_layout(self) -> None:
         # Set layout options

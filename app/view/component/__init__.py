@@ -4,6 +4,7 @@ from .extension_card import ExtensionCard
 from .instance_card import InstanceCard
 from .flow_layout import FlowLayout
 from .stacked_widget import StackedWidget
+from .url_widget import UrlIconWidget
 from .label import (
     CaptionLabel,
     BodyLabel,
@@ -24,6 +25,7 @@ __all__: list[str] = [
     "InstanceCard",
     "FlowLayout",
     "StackedWidget",
+    "UrlIconWidget",
     "CaptionLabel",
     "BodyLabel",
     "BodyStrongLabel",
