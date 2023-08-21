@@ -1,6 +1,6 @@
 from typing import Optional
 
-from qfluentwidgets import ScrollArea, PrimaryPushButton, RoundMenu, Action, ElevatedCardWidget
+from qfluentwidgets import SmoothScrollArea, PrimaryPushButton, RoundMenu, Action, ElevatedCardWidget
 from PySide6.QtCore import Qt, QPoint
 from PySide6.QtWidgets import (
     QWidget,
@@ -25,7 +25,7 @@ class InstancePerformanceView(ElevatedCardWidget):
     def __init__(self, parent: Optional[QWidget]) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = BodyStrongLargeLabel("性能监控", self)
+        self.title_label = BodyStrongLargeLabel("🚀 性能监控", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout
@@ -37,6 +37,7 @@ class InstancePerformanceView(ElevatedCardWidget):
         pass
 
     def __init_layout(self) -> None:
+        self.layout_manager.setContentsMargins(18, 16, 18, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.layout_manager.addWidget(self.title_label)
 
@@ -48,7 +49,7 @@ class InstanceDetailView(ElevatedCardWidget):
     def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = BodyStrongLargeLabel("实例详情", self)
+        self.title_label = BodyStrongLargeLabel("🔍 实例详情", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         self.form_layout_manager = QFormLayout()
@@ -60,14 +61,10 @@ class InstanceDetailView(ElevatedCardWidget):
     def __init_widget(self) -> None:
         # Set Object Name
         self.setObjectName("InstanceDetailView")
-        # Set Option & Policy
-        self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
-        # Set Geometry & Widget
-        # Apply stylesheet
-        # TODO This is just for design should move this to qss file later
 
     def __init_layout(self) -> None:
         # Set Option & Policy
+        self.layout_manager.setContentsMargins(18, 16, 18, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
         self.layout_manager.addWidget(self.title_label)
@@ -94,7 +91,7 @@ class InstanceCardView(QFrame):
     def __init__(self, parent: Optional[QWidget]) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
-        self.title_label = BodyStrongLargeLabel("实例总览", self)
+        self.title_label = BodyStrongLargeLabel("👁️ 实例总览", self)
         self.new_instance_button = PrimaryPushButton("新的实例", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
@@ -118,6 +115,7 @@ class InstanceCardView(QFrame):
     def __init_layout(self) -> None:
         # Set Widget Option & Policy
         # Set layout options
+        self.layout_manager.setContentsMargins(18, 12, 18, 12)
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
         self.layout_manager.addLayout(self.header_bar_layout_manager)
@@ -148,17 +146,17 @@ class InstanceCardView(QFrame):
         self.instance_card_container_layout_manager.addWidget(card)
 
 
-class InstanceInterface(ScrollArea):
+class InstanceInterface(SmoothScrollArea):
     def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        self.title_bar = InterfaceTitleBar("实例管理", "Manage all you instances right on one place", self)
+        self.title_bar = InterfaceTitleBar("📊 实例管理", "Manage all you instances right on one place", self)
         self.card_view = InstanceCardView(self)
         self.detail_view = InstanceDetailView(self)
         self.performance_view = InstancePerformanceView(self)
         # Instantiating layouts
-        self.view_container_layout_manager = QVBoxLayout(self)
+        self.view_container_layout_manager = QVBoxLayout(self.view_container)
         self.detail_layout_manager = QHBoxLayout()
         # Initialize self widget & layout
         self.__init_sub_widget()
@@ -174,8 +172,8 @@ class InstanceInterface(ScrollArea):
         # Set widgets object name
         self.setObjectName("InstanceInterface")
         # Set widgets options
-        self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setWidgetResizable(True)
         # Set Geometry & Widget
         self.setWidget(self.view_container)
         # Apply stylesheet
@@ -223,4 +221,6 @@ class InstanceInterface(ScrollArea):
         """
         self.card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
         self.card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
+        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
+        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
         self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
