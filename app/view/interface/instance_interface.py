@@ -1,4 +1,6 @@
-from qfluentwidgets import ScrollArea, PrimaryPushButton, RoundMenu, Action
+from typing import Optional
+
+from qfluentwidgets import ScrollArea, PrimaryPushButton, RoundMenu, Action, ElevatedCardWidget
 from PySide6.QtCore import Qt, QPoint
 from PySide6.QtWidgets import (
     QWidget,
@@ -19,7 +21,30 @@ from view.component import (
 )
 
 
-class InstanceDetailView(QFrame):
+class InstancePerformanceView(ElevatedCardWidget):
+    def __init__(self, parent: Optional[QWidget]) -> None:
+        super().__init__(parent=parent)
+        # Instantiating widgets
+        self.title_label = BodyStrongLargeLabel("性能监控", self)
+        # Instantiating layouts
+        self.layout_manager = QVBoxLayout(self)
+        # Initialize self widget & layout
+        self.__init_widget()
+        self.__init_sub_layout()
+        self.__init_layout()
+
+    def __init_widget(self) -> None:
+        pass
+
+    def __init_layout(self) -> None:
+        self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.layout_manager.addWidget(self.title_label)
+
+    def __init_sub_layout(self) -> None:
+        pass
+
+
+class InstanceDetailView(ElevatedCardWidget):
     def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
@@ -40,11 +65,8 @@ class InstanceDetailView(QFrame):
         # Set Geometry & Widget
         # Apply stylesheet
         # TODO This is just for design should move this to qss file later
-        self.setStyleSheet(
-            "#InstanceDetailView {background-color: rgb(242, 242, 242);border-radius: 6px}"
-        )  # noqa: E501
 
-    def __init_layout(self):
+    def __init_layout(self) -> None:
         # Set Option & Policy
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
@@ -52,7 +74,7 @@ class InstanceDetailView(QFrame):
         self.layout_manager.addSpacing(10)
         self.layout_manager.addLayout(self.form_layout_manager)
 
-    def __init_sub_layout(self):
+    def __init_sub_layout(self) -> None:
         # Set Option & Policy
         self.form_layout_manager.setRowWrapPolicy(QFormLayout.RowWrapPolicy.DontWrapRows)
         self.form_layout_manager.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.FieldsStayAtSizeHint)
@@ -69,7 +91,7 @@ class InstanceDetailView(QFrame):
 
 
 class InstanceCardView(QFrame):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QWidget]) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
         self.title_label = BodyStrongLargeLabel("实例总览", self)
@@ -93,7 +115,7 @@ class InstanceCardView(QFrame):
         # TODO This is just for design should move this to qss file later
         self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}")  # noqa: E501
 
-    def __init_layout(self):
+    def __init_layout(self) -> None:
         # Set Widget Option & Policy
         # Set layout options
         self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -102,7 +124,7 @@ class InstanceCardView(QFrame):
         self.layout_manager.addSpacing(10)
         self.layout_manager.addLayout(self.instance_card_container_layout_manager)
 
-    def __init_sub_widget_layout(self):
+    def __init_sub_widget_layout(self) -> None:
         # Set layout options
         self.instance_card_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
@@ -127,25 +149,28 @@ class InstanceCardView(QFrame):
 
 
 class InstanceInterface(ScrollArea):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
         self.title_bar = InterfaceTitleBar("实例管理", "Manage all you instances right on one place", self)
-        self.instance_card_view = InstanceCardView(self)
-        self.instance_detail_view = InstanceDetailView(self)
+        self.card_view = InstanceCardView(self)
+        self.detail_view = InstanceDetailView(self)
+        self.performance_view = InstancePerformanceView(self)
         # Instantiating layouts
         self.view_container_layout_manager = QVBoxLayout(self)
+        self.detail_layout_manager = QHBoxLayout()
         # Initialize self widget & layout
         self.__init_sub_widget()
         self.__init_widget()
+        self.__init_sub_layout()
         self.__init_layout()
         # Initialize signal connection
         self.__init_signal_connection()
         # Temporary
         self.load_instance_card()
 
-    def __init_widget(self):
+    def __init_widget(self) -> None:
         # Set widgets object name
         self.setObjectName("InstanceInterface")
         # Set widgets options
@@ -156,42 +181,46 @@ class InstanceInterface(ScrollArea):
         # Apply stylesheet
         StyleSheet.INSTANCE_INTERFACE.apply(self)
 
-    def __init_sub_widget(self):
+    def __init_sub_widget(self) -> None:
         self.view_container.setObjectName("InstanceInterfaceViewContainer")
 
-    def __init_layout(self):
+    def __init_layout(self) -> None:
         # Set Layout Options
         self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
         self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
         # Place layout widgets
         self.view_container_layout_manager.addWidget(self.title_bar)
         self.view_container_layout_manager.addSpacing(4)
-        self.view_container_layout_manager.addWidget(self.instance_card_view)
+        self.view_container_layout_manager.addWidget(self.card_view)
         self.view_container_layout_manager.addSpacing(2)
-        self.view_container_layout_manager.addWidget(self.instance_detail_view)
+        self.view_container_layout_manager.addLayout(self.detail_layout_manager)
         self.view_container_layout_manager.addStretch(1)
 
-    def __init_signal_connection(self):
-        self.instance_card_view.new_instance_button.clicked.connect(self.__show_new_instance_menu)
+    def __init_sub_layout(self) -> None:
+        self.detail_layout_manager.addWidget(self.detail_view)
+        self.detail_layout_manager.addWidget(self.performance_view)
 
-    def __show_new_instance_menu(self):
+    def __init_signal_connection(self) -> None:
+        self.card_view.new_instance_button.clicked.connect(self.__show_new_instance_menu)  # type: ignore
+
+    def __show_new_instance_menu(self) -> None:
         menu = RoundMenu(parent=self)
         menu.addAction(Action(MFI.BOT, "新建本地实例", self))
         menu.addAction(Action(MFI.BOT, "托管本地实例", self))
         menu.addAction(Action(MFI.BOT, "新建远程实例", self))
         menu.addAction(Action(MFI.BOT, "托管远程实例", self))
-        x: int = (self.instance_card_view.new_instance_button.width() - menu.sizeHint().width()) // 2 + 10
-        pos: QPoint = self.instance_card_view.new_instance_button.mapToGlobal(
-            QPoint(x, self.instance_card_view.new_instance_button.height())
+        x: int = (self.card_view.new_instance_button.width() - menu.sizeHint().width()) // 2 + 10
+        pos: QPoint = self.card_view.new_instance_button.mapToGlobal(
+            QPoint(x, self.card_view.new_instance_button.height())
         )
         menu.exec(pos)
 
-    def load_instance_card(self):
+    def load_instance_card(self) -> None:
         """Attention!!!
         Here this is a temporary method for design and layout purposes,
         we should never do this kind of thing inside the UI thread,
         it can have serious consequences.
         """
-        self.instance_card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
-        self.instance_card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
-        self.instance_card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
+        self.card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
+        self.card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
+        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
