@@ -1,7 +1,7 @@
 from typing import Optional, TYPE_CHECKING
 
 from qfluentwidgets import CardWidget, IconWidget, PrimaryPushButton, FluentIcon as FI
-from PySide6.QtCore import Qt, Signal
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QLabel, QHBoxLayout, QVBoxLayout, QSizePolicy
 
 from core import StyleSheet, MyFluentIcon as MFI
