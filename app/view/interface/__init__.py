@@ -1,16 +1,6 @@
-from .interface_templates import InterfaceTemplates
-from .dashboard_interface import DashBoardInterface
-from .market_interface import MarketInterface
-from .instance_interface import InstanceInterface
-from .console_interface import ConsoleInterface
-from .setting_interface import SettingInterface
-
-
-__all__: list[str] = [
-    "InterfaceTemplates",
-    "DashBoardInterface",
-    "MarketInterface",
-    "InstanceInterface",
-    "ConsoleInterface",
-    "SettingInterface",
-]
+from .interface_templates import InterfaceTemplates as InterfaceTemplates
+from .dashboard_interface import DashBoardInterface as DashBoardInterface
+from .market_interface import MarketInterface as MarketInterface
+from .instance_interface import InstanceInterface as InstanceInterface
+from .console_interface import ConsoleInterface as ConsoleInterface
+from .setting_interface import SettingInterface as SettingInterface

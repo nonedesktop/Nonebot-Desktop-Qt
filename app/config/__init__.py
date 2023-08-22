@@ -1,4 +1,1 @@
-from .config import Config
-
-
-__all__: list[str] = ["Config"]
+from .config import Config as Config

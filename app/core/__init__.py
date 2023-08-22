@@ -1,5 +1,2 @@
-from .icon import MyFluentIcon
-from .style import StyleSheet
-
-
-__all__: list[str] = ["MyFluentIcon", "StyleSheet"]
+from .icon import MyFluentIcon as MyFluentIcon
+from .style import StyleSheet as StyleSheet
