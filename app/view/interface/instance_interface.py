@@ -151,7 +151,7 @@ class InstanceInterface(SmoothScrollArea):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.view_container = QWidget()
-        self.title_bar = InterfaceTitleBar("📊 实例管理", "Manage all you instances right on one place", self)
+        self.title_bar = InterfaceTitleBar("🔌 实例管理", "Manage all you instances right on one place", self)
         self.card_view = InstanceCardView(self)
         self.detail_view = InstanceDetailView(self)
         self.performance_view = InstancePerformanceView(self)
