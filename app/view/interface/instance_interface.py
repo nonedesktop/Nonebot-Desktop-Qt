@@ -190,7 +190,7 @@ class InstanceInterface(SmoothScrollArea):
         self.view_container_layout_manager.addWidget(self.title_bar)
         self.view_container_layout_manager.addSpacing(4)
         self.view_container_layout_manager.addWidget(self.card_view)
-        self.view_container_layout_manager.addSpacing(2)
+        self.view_container_layout_manager.addSpacing(5)
         self.view_container_layout_manager.addLayout(self.detail_layout_manager)
         self.view_container_layout_manager.addStretch(1)
 
