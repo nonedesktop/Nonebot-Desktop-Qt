@@ -15,15 +15,14 @@ class Controller:
         self.set_window_theme(Theme.LIGHT)
 
     def init_window_geometry(self, screen: "QScreen") -> None:
-        scale_factor: float = screen.logicalDotsPerInch() / 96.0
         screen_geometry = screen.geometry()
         screen_width: int = screen_geometry.width()
         screen_height: int = screen_geometry.height()
 
-        min_width = int(screen_width * 0.6 * scale_factor)
-        min_height = int(screen_height * 0.6 * scale_factor)
-        init_width = int(screen_width * 0.75 * scale_factor)
-        init_height = int(screen_height * 0.75 * scale_factor)
+        min_width = int(screen_width * 0.6)
+        min_height = int(screen_height * 0.6)
+        init_width = int(screen_width * 0.75)
+        init_height = int(screen_height * 0.75)
 
         self.ui_main_window.setMinimumSize(min_width, min_height)
         self.ui_main_window.resize(init_width, init_height)
