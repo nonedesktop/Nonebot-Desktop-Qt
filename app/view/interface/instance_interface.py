@@ -110,7 +110,7 @@ class InstanceCardView(QFrame):
         # Set Geometry & Widget
         # Apply stylesheet
         # TODO This is just for design should move this to qss file later
-        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border-radius: 6px}")  # noqa: E501
+        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border: 1px solid rgba(0, 0, 0, 0.0578);border-radius: 6px}")  # noqa: E501
 
     def __init_layout(self) -> None:
         # Set Widget Option & Policy
