@@ -33,8 +33,8 @@ class ConsoleLogView(TextEdit):
         self.append("就绪")
         # 'append' operation will add a new line automatically
 
-    def contextMenuEvent(self, e):
-        pass
+    # def contextMenuEvent(self, e):
+    #     pass
 
 
 class ConsoleInterface(QFrame):
