@@ -60,7 +60,7 @@ class Window(FramelessWindow):
         self.stacked_widget.setCurrentWidget(
             w=interface,
             enableEasingAnimation=False,
-            animationDurationMsec=260,
+            animationDurationMsec=180,
         )
 
     def addSubInterface(
@@ -107,7 +107,7 @@ class Window(FramelessWindow):
             onClick=lambda: self.switchTo(interface),
             position=position,
             tooltip=text,
-            parentRouteKey=parent.objectName() if parent else None,
+            parentRouteKey=parent.objectName() if parent else None, # type: ignore
         )
 
         # initialize selected item
