@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 
+from model import InstanceMetadata
 from core import StyleSheet, MyFluentIcon as MFI
 from view.component import (
     InterfaceTitleBar,
@@ -129,7 +130,7 @@ class InstanceCardView(QFrame):
         self.header_bar_layout_manager.addWidget(self.title_label, alignment=Qt.AlignmentFlag.AlignLeft)
         self.header_bar_layout_manager.addWidget(self.new_instance_button, alignment=Qt.AlignmentFlag.AlignRight)
 
-    def add_instance_card(self, instance_name: str, instance_id: str, driver_name: str, adapter_name: str) -> None:
+    def add_instance_card(self, instance_metadata: InstanceMetadata) -> None:
         """将实例卡片添加到实例布局中
         参数:
             instance_name: 实例的名称
@@ -141,8 +142,7 @@ class InstanceCardView(QFrame):
             最佳实践应当是在非GUI线程内进行调用,否则可能会造成GUI线程绘制阻塞,
             因此需要将此函数注册到控制器中,再交由线程管理器移交到工作线程处理.
         """
-        # TODO Use Emun with driver and adapter
-        card = InstanceCard(instance_name, instance_id, driver_name, adapter_name, self)
+        card = InstanceCard(instance_metadata, self)
         self.instance_card_container_layout_manager.addWidget(card)
 
 
@@ -219,8 +219,14 @@ class InstanceInterface(SmoothScrollArea):
         we should never do this kind of thing inside the UI thread,
         it can have serious consequences.
         """
-        self.card_view.add_instance_card("Untitled Instance", "0XA", "FastAPI", "OneBot V11")
-        self.card_view.add_instance_card("Github Bot", "0XB", "FastAPI", "Github")
-        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
-        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
-        self.card_view.add_instance_card("Cai Bot", "0XC", "FastAPI", "Github")
+        _ = [""]
+        a = InstanceMetadata("0XA", "Untitled Instance", "", "FastAPI", "Red", _)
+        b = InstanceMetadata("0XB", "Github Bot", "", "FastAPI", "Github", _)
+        c = InstanceMetadata("0XC", "Cai Bot", "", "FastAPI", "Github", _)
+        d = InstanceMetadata("0XD", "YunZai Bot", "", "FastAPI", "OneBot V11", _)
+        e = InstanceMetadata("0XE", "Telegram Bot", "", "FastAPI", "Telegram", _)
+        self.card_view.add_instance_card(a)
+        self.card_view.add_instance_card(b)
+        self.card_view.add_instance_card(c)
+        self.card_view.add_instance_card(d)
+        self.card_view.add_instance_card(e)
