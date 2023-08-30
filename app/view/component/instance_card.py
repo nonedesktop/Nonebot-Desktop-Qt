@@ -90,5 +90,6 @@ class InstanceCard(CardWidget):
 
     def mouseReleaseEvent(self, event: "QMouseEvent") -> None:
         self.clicked.emit(self.metadata)
+        self.isPressed = False
         # TODO for debug should remove later
         print(f"emited {self.metadata.name} instance")
