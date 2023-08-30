@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
 )
 
 from model import InstanceMetadata
-from core import StyleSheet, MyFluentIcon as MFI
+from core import StyleSheet, MyFluentIcon as MFI, signal_bus
 from view.component import (
     InterfaceTitleBar,
     InstanceCard,
@@ -51,6 +51,18 @@ class InstanceDetailView(ElevatedCardWidget):
         super().__init__(parent=parent)
         # Instantiating widgets
         self.title_label = BodyStrongLargeLabel("🔍 实例详情", self)
+        self.id_label = BodyStrongLabel("INSTANCE ID", self)
+        self.id_field_label = BodyLabel("", self)
+        self.name_label = BodyStrongLabel("INSTANCE NAME", self)
+        self.name_field_label = BodyLabel("", self)
+        self.path_label = BodyStrongLabel("INSTANCE PATH")
+        self.path_field_label = BodyLabel("", self)
+        self.driver_label = BodyStrongLabel("DRIVER", self)
+        self.driver_field_label = BodyLabel("DRIVER", self)
+        self.adapter_label = BodyStrongLabel("ADAPTER", self)
+        self.adapter_field_label = BodyLabel("", self)
+        self.plugin_list = BodyStrongLabel("PLUGIN LIST", self)
+        self.plugin_field_list = BodyLabel("", self)
         # Instantiating layouts
         self.layout_manager = QVBoxLayout(self)
         self.form_layout_manager = QFormLayout()
@@ -79,13 +91,20 @@ class InstanceDetailView(ElevatedCardWidget):
         self.form_layout_manager.setHorizontalSpacing(50)
         # Place layout widgets
         # TODO Just for Design should consider all later
-        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE ID", self), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE NAME", self), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("INSTANCE PATH"), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("PLUGIN LIST", self), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("ADAPTER", self), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("DRIVER", self), BodyLabel("Unknow", self))
-        self.form_layout_manager.addRow(BodyStrongLabel("PATH", self), BodyLabel("Unknow", self))
+        self.form_layout_manager.addRow(self.id_label, self.id_field_label)
+        self.form_layout_manager.addRow(self.name_label, self.name_field_label)
+        self.form_layout_manager.addRow(self.path_label, self.path_field_label)
+        self.form_layout_manager.addRow(self.driver_label, self.driver_field_label)
+        self.form_layout_manager.addRow(self.adapter_label, self.adapter_field_label)
+        self.form_layout_manager.addRow(self.plugin_list, self.plugin_field_list)
+
+    def show_detail(self, metadata: InstanceMetadata) -> None:
+        self.id_field_label.setText(metadata.id)
+        self.name_field_label.setText(metadata.name)
+        self.path_field_label.setText(metadata.path)
+        self.driver_field_label.setText(metadata.driver)
+        self.adapter_field_label.setText(metadata.adapter)
+        # TODO plugin list
 
 
 class InstanceCardView(QFrame):
@@ -111,7 +130,9 @@ class InstanceCardView(QFrame):
         # Set Geometry & Widget
         # Apply stylesheet
         # TODO This is just for design should move this to qss file later
-        self.setStyleSheet("#InstanceCardView {background-color: rgb(242, 242, 242);border: 1px solid rgba(0, 0, 0, 0.0578);border-radius: 6px}")  # noqa: E501
+        self.setStyleSheet(
+            "#InstanceCardView {background-color: rgb(242, 242, 242);border: 1px solid rgba(0, 0, 0, 0.0578);border-radius: 6px}"
+        )  # noqa: E501
 
     def __init_layout(self) -> None:
         # Set Widget Option & Policy
@@ -200,6 +221,7 @@ class InstanceInterface(SmoothScrollArea):
 
     def __init_signal_connection(self) -> None:
         self.card_view.new_instance_button.clicked.connect(self.__show_new_instance_menu)  # type: ignore
+        signal_bus.InstanceCardClicked.connect(self.detail_view.show_detail)
 
     def __show_new_instance_menu(self) -> None:
         menu = RoundMenu(parent=self)
@@ -221,7 +243,7 @@ class InstanceInterface(SmoothScrollArea):
         """
         _ = [""]
         a = InstanceMetadata("0XA", "Untitled Instance", "", "FastAPI", "Red", _)
-        b = InstanceMetadata("0XB", "Github Bot", "", "FastAPI", "Github", _)
+        b = InstanceMetadata("0XB", "QQ Bot", "", "FastAPI", "OneBot V11", _)
         c = InstanceMetadata("0XC", "Cai Bot", "", "FastAPI", "Github", _)
         d = InstanceMetadata("0XD", "YunZai Bot", "", "FastAPI", "OneBot V11", _)
         e = InstanceMetadata("0XE", "Telegram Bot", "", "FastAPI", "Telegram", _)

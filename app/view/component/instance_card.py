@@ -2,33 +2,39 @@ from typing import Optional, TYPE_CHECKING
 
 from qfluentwidgets import CardWidget, InfoBadge, DotInfoBadge, TransparentToolButton
 from qfluentwidgets import FluentIcon as FI
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout
 
+from core import signal_bus
+from model import InstanceMetadata
 from .label import CaptionLabel, BodyStrongLabel
 
 
 if TYPE_CHECKING:
     from PySide6.QtWidgets import QWidget
-    from model import InstanceMetadata
+    from PySide6.QtGui import QMouseEvent
 
 
 class InstanceCard(CardWidget):
+    clicked = Signal(InstanceMetadata)
+
     def __init__(
         self,
         metadata: "InstanceMetadata",
         parent: Optional["QWidget"] = None,
     ) -> None:
         super().__init__(parent=parent)
+        # Binding data
+        self.metadata = metadata
         # Instantiating Widget Objects
-        self.instance_name_label = BodyStrongLabel(metadata.name, self)
+        self.instance_name_label = BodyStrongLabel(self.metadata.name, self)
         self.instance_status_label = CaptionLabel("运行中", self)
         self.instance_status_icon = DotInfoBadge.success(self)
-        self.instance_id_label = CaptionLabel(metadata.id, self)
+        self.instance_id_label = CaptionLabel(self.metadata.id, self)
         self.instance_id_icon = InfoBadge.info("实例ID")
-        self.driver_name_label = CaptionLabel(metadata.driver, self)
+        self.driver_name_label = CaptionLabel(self.metadata.driver, self)
         self.driver_icon = InfoBadge.info("驱动器")
-        self.adapter_name_label = CaptionLabel(metadata.adapter, self)
+        self.adapter_name_label = CaptionLabel(self.metadata.adapter, self)
         self.adapter_icon = InfoBadge.info("适配器")
         self.more_action_button = TransparentToolButton(FI.MORE, self)
         # Instantiating Layout Objects
@@ -47,6 +53,7 @@ class InstanceCard(CardWidget):
         # Set Widget Option & Policy
         self.setFixedHeight(80)
         # Set Geometry & Widget
+        self.clicked.connect(signal_bus.InstanceCardClicked)
 
     def __init_sub_widget(self) -> None:
         # Set Object Name
@@ -80,3 +87,8 @@ class InstanceCard(CardWidget):
         self.info_bar_layout_manager.addWidget(self.adapter_name_label)
         self.info_bar_layout_manager.addStretch(1)
         self.info_bar_layout_manager.addWidget(self.more_action_button)
+
+    def mouseReleaseEvent(self, event: "QMouseEvent") -> None:
+        self.clicked.emit(self.metadata)
+        # TODO for debug should remove later
+        print(f"emited {self.metadata.name} instance")
