@@ -11,7 +11,7 @@ from qfluentwidgets import (
 )
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget
+from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget, QSizePolicy
 
 from core import StyleSheet
 from view.component import InterfaceTitleBar, FlowLayout, DisplayLabel
@@ -173,22 +173,27 @@ class CommandBar(QFrame):
         self.certified_extensions_label_button = PillPushButton("官方认证", self, FI.TAG)
         self.sort_filter_button = TransparentDropDownPushButton("排序和筛选", self, FI.SCROLL)
         # Instantiating Layout Objects
-        self.layout_manager = QHBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
         # Initialize Widgets & Layouts
-        self.__init_widget()
-        self.__init_layout()
+        self.__init_sub_widget__()
+        self.__init_layou__()
 
-    def __init_widget(self) -> None:
-        self.search_line_edit.setFixedWidth(320)
-        self.search_line_edit.setPlaceholderText("搜索插件或适配器")
+    def __init_sub_widget__(self) -> None:
+        self.search_line_edit.setPlaceholderText("搜索")
         self.search_line_edit.textChanged.connect(self.search_line_edit.search)  # type: ignore
 
-    def __init_layout(self) -> None:
-        self.layout_manager.setAlignment(Qt.AlignmentFlag.AlignRight)
+    def __init_layou__(self) -> None:
+        # Setting Layout Options
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignRight)
         # Place Widgets To Layout
-        self.layout_manager.addWidget(self.search_line_edit)
-        self.layout_manager.addWidget(self.plugin_label_button)
-        self.layout_manager.addWidget(self.adapter_label_button)
-        self.layout_manager.addWidget(self.certified_extensions_label_button)
-        self.layout_manager.addStretch(1)
-        self.layout_manager.addWidget(self.sort_filter_button)
+        self.main_layout.addWidget(self.search_line_edit, 3)
+        self.main_layout.addWidget(self.plugin_label_button)
+        self.main_layout.addWidget(self.adapter_label_button)
+        self.main_layout.addWidget(self.certified_extensions_label_button)
+        self.main_layout.addStretch(1)
+        self.main_layout.addWidget(self.sort_filter_button)
+
+    def set_search_line_edit_place_holder_text(self, text: str) -> None:
+        """设置工具栏搜索框的搜索提示文字"""
+
+        self.search_line_edit.setPlaceholderText(text)
