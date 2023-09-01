@@ -14,117 +14,116 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget
 
 from core import StyleSheet
-from view.component import InterfaceTitleBar, ExtensionCard, FlowLayout
+from view.component import InterfaceTitleBar, FlowLayout, DisplayLabel
 
 
 class MarketInterface(ScrollArea):
     def __init__(self, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent=parent)
-        # Instantiating widgets
+        # Instantiating Widget Objects
         self.view_container = QWidget()
         self.title_bar = InterfaceTitleBar(
             title="🛒 扩展商店",
             subtitle="Enjoy all the extensions from the community, with our rich ecosystem",
             parent=self,
         )
-        self.extension_card_view = SegmentedNavigationView(self)
-        # Instantiating layouts
-        self.view_container_layout_manager = QVBoxLayout(self.view_container)
+        self.extension_card_view = SegmentedNavigationExtensionCardView(self)
+        # Instantiating Layout Objects
+        self.view_container_main_layout = QVBoxLayout(self.view_container)
         # Initialize self widget & layout
-        self.__init_sub_widget()
-        self.__init_widget()
-        self.__init_layout()
+        self.__init_sub_widget__()
+        self.__init_widget__()
+        self.__init_layout__()
 
-    def __init_widget(self):
+    def __init_widget__(self) -> None:
+        # Setting Objects Name
         self.setObjectName("MarketInterface")
+        # Setting Widget Sub Widget
+        self.setWidget(self.view_container)
+        # Setting Widget Options
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setWidgetResizable(True)
+        # Setting Widget StyleSheet
         StyleSheet.MARKET_INTERFACE.apply(self)
 
-    def __init_sub_widget(self):
+    def __init_sub_widget__(self) -> None:
+        # Setting Objects Name
         self.view_container.setObjectName("MarketInterfaceViewContainer")
 
-    def __init_layout(self):
-        self.setWidget(self.view_container)
-        self.view_container_layout_manager.setContentsMargins(36, 20, 36, 12)
-        self.view_container_layout_manager.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.view_container_layout_manager.addWidget(self.title_bar)
-        self.view_container_layout_manager.setSpacing(4)
-        self.view_container_layout_manager.addWidget(self.extension_card_view)
-
-    def resizeEvent(self, event):
-        super().resizeEvent(event)
-        self.title_bar.resize(self.width(), self.title_bar.height())
+    def __init_layout__(self) -> None:
+        # Setting Layout Options
+        self.view_container_main_layout.setContentsMargins(36, 20, 36, 12)
+        self.view_container_main_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        # Arranging Widgets & Layouts
+        self.view_container_main_layout.addWidget(self.title_bar)
+        self.view_container_main_layout.setSpacing(4)
+        self.view_container_main_layout.addWidget(self.extension_card_view)
 
 
-class ExtensionCardView(QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent=parent)
-        # Instantiating widgets
-        self.command_bar = CommandBar(self)
-        self.card_view_container = SmoothScrollArea(self)
-        self.card_view_content = QWidget()
-        # Instantiating layouts
-        self.layout_manager = QVBoxLayout(self)
-        self.card_view_content_layout_manager = FlowLayout(self.card_view_content, True, True)
-        # Instantiating data and data structures
-        self.extension_cards: list[ExtensionCard] = []
-        # TODO 实现一个前缀搜索树 Trie Tree
-        self.__init_sub_widget()
-        self.__init_layout()
-
-    def __init_sub_widget(self):
-        # init search_line_edit widget
-        # init card_view_container widget
-        self.card_view_container.setWidget(self.card_view_content)
-        self.card_view_container.setWidgetResizable(True)
-        self.card_view_container.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-
-    def __init_layout(self):
-        self.layout_manager.addWidget(self.command_bar)
-        self.layout_manager.addWidget(self.card_view_container)
-
-
-class SegmentedNavigationView(QWidget):
+class SegmentedNavigationExtensionCardView(QWidget):
     def __init__(self, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent=parent)
-        # Instantiating widgets
+        # Initializing Data Bindings and Objects
+        # Instantiating Widget Objects
         self.pivot = SegmentedWidget(self)
         self.command_bar = CommandBar(self)
         self.stacked_container = QStackedWidget(self)
         self.driver_card_view = PluginCardView(self)
         self.adapter_card_view = PluginCardView(self)
         self.plugin_card_view = PluginCardView(self)
-        self.robot_card_view = PluginCardView(self)
-        # Instantiating layouts
+        self.robot_card_view = RobotCardView(self)
+        # Instantiating Layout Objects
         self.layout_manager = QVBoxLayout(self)
         # Initialize self widget & layout
+        self.__init_sub_widget__()
         self.__init_widget()
         self.__init_layout()
 
     def __init_widget(self) -> None:
-        self.__add_sub_interface(self.driver_card_view, "DriverCardView", "驱动器")
-        self.__add_sub_interface(self.adapter_card_view, "AdapterCardView", "适配器")
-        self.__add_sub_interface(self.plugin_card_view, "PluginCardView", "插件")
-        self.__add_sub_interface(self.robot_card_view, "RobotCardView", "机器人")
+        pass
+
+    def __init_sub_widget__(self) -> None:
+        # Setting Objects Name
+        self.driver_card_view.setObjectName("DriverCardView")
+        self.adapter_card_view.setObjectName("DdapterCardView")
+        self.plugin_card_view.setObjectName("PluginCardView")
+        self.robot_card_view.setObjectName("RobotCardView")
+        # Setting Widget Sub Widget
+        self.stacked_container.addWidget(self.plugin_card_view)
+        self.pivot.addItem(
+            self.plugin_card_view.objectName(),
+            "插件",
+            lambda: self.stacked_container.setCurrentWidget(self.plugin_card_view),
+        )
+        self.stacked_container.addWidget(self.adapter_card_view)
+        self.pivot.addItem(
+            self.adapter_card_view.objectName(),
+            "适配器",
+            lambda: self.stacked_container.setCurrentWidget(self.adapter_card_view),
+        )
+        self.stacked_container.addWidget(self.driver_card_view)
+        self.pivot.addItem(
+            self.driver_card_view.objectName(),
+            "驱动器",
+            lambda: self.stacked_container.setCurrentWidget(self.driver_card_view),
+        )
+        self.stacked_container.addWidget(self.robot_card_view)
+        self.pivot.addItem(
+            self.robot_card_view.objectName(),
+            "机器人",
+            lambda: self.stacked_container.setCurrentWidget(self.robot_card_view),
+        )
+        # Setting Widget Options
+        self.stacked_container.setCurrentWidget(self.plugin_card_view)
+        self.pivot.setCurrentItem(self.plugin_card_view.objectName())
+        # Initialize Signal Connections
         self.stacked_container.currentChanged.connect(self.onCurrentIndexChanged)  # type: ignore
-        self.stacked_container.setCurrentWidget(self.adapter_card_view)
-        self.pivot.setCurrentItem(self.adapter_card_view.objectName())
 
     def __init_layout(self) -> None:
         # Place layout widgets
         self.layout_manager.addWidget(self.pivot)
         self.layout_manager.addWidget(self.command_bar)
         self.layout_manager.addWidget(self.stacked_container)
-
-    def __add_sub_interface(self, widget: QWidget, objectName: str, text: str) -> None:
-        widget.setObjectName(objectName)
-        self.stacked_container.addWidget(widget)
-        self.pivot.addItem(
-            routeKey=objectName,
-            text=text,
-            onClick=lambda: self.stacked_container.setCurrentWidget(widget),
-        )
 
     def onCurrentIndexChanged(self, index) -> None:
         widget: QWidget = self.stacked_container.widget(index)
@@ -147,6 +146,23 @@ class PluginCardView(SmoothScrollArea):
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
 
+class RobotCardView(QWidget):
+    def __init__(self, parent: Optional[QWidget] = None) -> None:
+        super().__init__(parent=parent)
+        # Instantiating Widget Objects
+        self.text_label = DisplayLabel("🚧 施工中...", self)
+        # Instantiating Layout Objects
+        self.main_layout = QVBoxLayout(self)
+        # Initializing Widget & Layout
+        self.__init_layout__()
+
+    def __init_layout__(self) -> None:
+        # Setting Layout Options
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
+        # Arranging Widgets
+        self.main_layout.addWidget(self.text_label)
+
+
 class CommandBar(QFrame):
     def __init__(self, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent=parent)
@@ -163,7 +179,7 @@ class CommandBar(QFrame):
         self.__init_layout()
 
     def __init_widget(self) -> None:
-        self.search_line_edit.setFixedWidth(280)
+        self.search_line_edit.setFixedWidth(320)
         self.search_line_edit.setPlaceholderText("搜索插件或适配器")
         self.search_line_edit.textChanged.connect(self.search_line_edit.search)  # type: ignore
 

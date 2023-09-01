@@ -35,28 +35,30 @@ class Templates(QObject):
 
     def __init_widget__(self) -> None:
         # Setting Objects Name
-        # Setting Widget Options
         # Setting Widget Sub Widget
+        # Setting Widget Options
         # Setting Widget Geometry
+        # Initialize Signal Connections
         # Setting Widget StyleSheet
         pass
 
     def __init_sub_widget__(self) -> None:
         # Setting Objects Name
-        # Setting Widget Options
         # Setting Widget Sub Widget
+        # Setting Widget Options
         # Setting Widget Geometry
+        # Initialize Signal Connections
         # Setting Widget StyleSheet
         pass
 
     def __init_layout__(self) -> None:
         # Setting Layout Options
-        # Arranging Widgets
+        # Arranging Widgets & Layouts
         pass
 
     def __init_sub_layout__(self) -> None:
         # Setting Layout Options
-        # Arranging Widgets
+        # Arranging Widgets & Layouts
         pass
 
     def event_rewrite(self) -> None:
