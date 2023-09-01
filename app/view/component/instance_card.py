@@ -5,7 +5,6 @@ from qfluentwidgets import FluentIcon as FI
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QHBoxLayout, QVBoxLayout
 
-from core import signal_bus
 from model import InstanceMetadata
 from .label import CaptionLabel, BodyStrongLabel
 
@@ -53,7 +52,6 @@ class InstanceCard(CardWidget):
         # Set Widget Option & Policy
         self.setFixedHeight(80)
         # Set Geometry & Widget
-        self.clicked.connect(signal_bus.InstanceCardClicked)
 
     def __init_sub_widget(self) -> None:
         # Set Object Name

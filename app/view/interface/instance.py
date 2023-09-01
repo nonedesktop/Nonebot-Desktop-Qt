@@ -1,7 +1,7 @@
 from typing import Optional
 
 from qfluentwidgets import SmoothScrollArea, PrimaryPushButton, RoundMenu, Action, ElevatedCardWidget
-from PySide6.QtCore import Qt, QPoint
+from PySide6.QtCore import Qt, QPoint, Signal
 from PySide6.QtWidgets import (
     QWidget,
     QFrame,
@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
 )
 
 from model import InstanceMetadata
-from core import StyleSheet, MyFluentIcon as MFI, signal_bus
+from core import StyleSheet, MyFluentIcon as MFI
 from view.component import (
     InterfaceTitleBar,
     InstanceCard,
@@ -108,6 +108,7 @@ class InstanceDetailView(ElevatedCardWidget):
 
 
 class InstanceCardView(QFrame):
+    instanceCardClicked = Signal(InstanceMetadata)
     def __init__(self, parent: Optional[QWidget]) -> None:
         super().__init__(parent=parent)
         # Instantiating widgets
@@ -164,6 +165,7 @@ class InstanceCardView(QFrame):
             因此需要将此函数注册到控制器中,再交由线程管理器移交到工作线程处理.
         """
         card = InstanceCard(instance_metadata, self)
+        card.clicked.connect(self.instanceCardClicked)
         self.instance_card_container_layout_manager.addWidget(card)
 
 
@@ -221,7 +223,9 @@ class InstanceInterface(SmoothScrollArea):
 
     def __init_signal_connection(self) -> None:
         self.card_view.new_instance_button.clicked.connect(self.__show_new_instance_menu)  # type: ignore
-        signal_bus.InstanceCardClicked.connect(self.detail_view.show_detail)
+        # signal_bus.InstanceCardClicked.connect(self.detail_view.show_detail)
+        # self.card_view.card.clicked.connect(self.detail_view.show_detail)
+        self.card_view.instanceCardClicked.connect(self.detail_view.show_detail)
 
     def __show_new_instance_menu(self) -> None:
         menu = RoundMenu(parent=self)

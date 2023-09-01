@@ -1,10 +1,8 @@
-from PySide6.QtCore import QObject, Signal
-
-from model import InstanceMetadata
+from PySide6.QtCore import QObject
 
 
 class _SignalBus(QObject):
-    InstanceCardClicked = Signal(InstanceMetadata)
+    pass
 
 
 signal_bus = _SignalBus()
