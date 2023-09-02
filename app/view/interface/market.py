@@ -11,10 +11,11 @@ from qfluentwidgets import (
 )
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget, QSizePolicy
+from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget
 
 from core import StyleSheet
-from view.component import InterfaceTitleBar, FlowLayout, DisplayLabel
+from model import PluginMetadata
+from view.component import InterfaceTitleBar, FlowLayout, DisplayLabel, ExtensionCard
 
 
 class MarketInterface(ScrollArea):
@@ -43,6 +44,7 @@ class MarketInterface(ScrollArea):
         # Setting Widget Options
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setWidgetResizable(True)
+        self.extension_card_view.load_plugin_card()
         # Setting Widget StyleSheet
         StyleSheet.MARKET_INTERFACE.apply(self)
 
@@ -68,9 +70,9 @@ class SegmentedNavigationExtensionCardView(QWidget):
         self.pivot = SegmentedWidget(self)
         self.command_bar = CommandBar(self)
         self.stacked_container = QStackedWidget(self)
-        self.driver_card_view = PluginCardView(self)
-        self.adapter_card_view = PluginCardView(self)
         self.plugin_card_view = PluginCardView(self)
+        self.adapter_card_view = PluginCardView(self)
+        self.driver_card_view = DriverCardview(self)
         self.robot_card_view = RobotCardView(self)
         # Instantiating Layout Objects
         self.layout_manager = QVBoxLayout(self)
@@ -129,6 +131,27 @@ class SegmentedNavigationExtensionCardView(QWidget):
         widget: QWidget = self.stacked_container.widget(index)
         self.pivot.setCurrentItem(widget.objectName())
 
+    def load_plugin_card(self) -> None:
+        # Just for mocking and test
+        # should remove this later
+        _ = []
+        a = PluginMetadata(
+            "nonebot_plugin_status",
+            "nonebot-plugin-status",
+            "服务器状态查看",
+            "通过戳一戳获取服务器状态",
+            "yanyongyu",
+            "https://github.com/cscs181/QQ-GitHub-Bot/tree/master/src/plugins/nonebot_plugin_status",
+            _,
+            True,
+            None,
+            _,
+            True,
+            "2023-06-26T21:53:28.908452+08:00",  # type: ignore
+        )
+        for _ in range(10):
+            self.plugin_card_view.add_card(a)
+
 
 class PluginCardView(SmoothScrollArea):
     def __init__(self, parent: Optional[QWidget] = None) -> None:
@@ -136,7 +159,7 @@ class PluginCardView(SmoothScrollArea):
         # Instantiating widgets
         self.view_content = QWidget()
         # Instantiating layouts
-        self.view_content_layout_manager = FlowLayout(self.view_content, True, True)
+        self.view_content_layout_manager = FlowLayout(self.view_content, True)
         # Initialize self widget & layout
         self.__init_widget()
 
@@ -144,6 +167,44 @@ class PluginCardView(SmoothScrollArea):
         self.setWidget(self.view_content)
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setViewportMargins(0, 5, 0, 5)
+
+    def add_card(self, metadata: PluginMetadata) -> None:
+        card = ExtensionCard(metadata, self)
+        self.view_content_layout_manager.addWidget(card)
+
+
+class AdapterCardView(SmoothScrollArea):
+    def __init__(self, parent: Optional[QWidget] = None) -> None:
+        super().__init__(parent=parent)
+        # Instantiating widgets
+        self.view_container = QWidget()
+        # Instantiating layouts
+        self.view_container_main_layout = FlowLayout(self.view_container, True, True)
+        # Initialize self widget & layout
+        self.__init_widget()
+
+    def __init_widget(self) -> None:
+        self.setWidget(self.view_container)
+        self.setWidgetResizable(True)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
+
+class DriverCardview(QWidget):
+    def __init__(self, parent: Optional[QWidget] = None) -> None:
+        super().__init__(parent=parent)
+        # Instantiating Widget Objects
+        self.text_label = DisplayLabel("🚧 施工中...", self)
+        # Instantiating Layout Objects
+        self.main_layout = QVBoxLayout(self)
+        # Initializing Widget & Layout
+        self.__init_layout()
+
+    def __init_layout(self):
+        # Setting Layout Options
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
+        # Arranging Widgets
+        self.main_layout.addWidget(self.text_label)
 
 
 class RobotCardView(QWidget):
