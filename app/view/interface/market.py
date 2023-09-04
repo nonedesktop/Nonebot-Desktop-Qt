@@ -9,7 +9,6 @@ from qfluentwidgets import (
     TransparentDropDownPushButton,
     FluentIcon as FI,
 )
-
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QFrame, QVBoxLayout, QHBoxLayout, QStackedWidget
 
@@ -119,7 +118,7 @@ class SegmentedNavigationExtensionCardView(QWidget):
         self.stacked_container.setCurrentWidget(self.plugin_card_view)
         self.pivot.setCurrentItem(self.plugin_card_view.objectName())
         # Initialize Signal Connections
-        self.stacked_container.currentChanged.connect(self.onCurrentIndexChanged)  # type: ignore
+        self.stacked_container.currentChanged.connect(self.onCurrentIndexChanged)
 
     def __init_layout(self) -> None:
         # Place layout widgets
